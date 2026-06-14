@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayham Fitness Pro</title>
+<title>Ayham Fitness Elite</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -22,58 +21,74 @@ color:white;
 overflow-x:hidden;
 }
 
-/* background glow */
-.glow{
+/* ===== Animated Background ===== */
+.bg{
 position:fixed;
-top:-200px;
-right:-200px;
-width:700px;
-height:700px;
-background:#ff174f;
-filter:blur(200px);
-opacity:.18;
-border-radius:50%;
-animation:floatGlow 8s ease-in-out infinite;
+width:100%;
+height:100%;
+z-index:-1;
+background:radial-gradient(circle at top,#1a0008,#050505);
 }
 
-@keyframes floatGlow{
+.glow{
+position:absolute;
+width:600px;
+height:600px;
+background:#ff174f;
+filter:blur(180px);
+opacity:.15;
+border-radius:50%;
+animation:float 8s infinite ease-in-out;
+}
+
+.glow:nth-child(2){
+background:#ff0033;
+left:50%;
+top:40%;
+}
+
+@keyframes float{
 0%{transform:translateY(0);}
-50%{transform:translateY(70px);}
+50%{transform:translateY(80px);}
 100%{transform:translateY(0);}
 }
 
-/* container */
+/* ===== Container ===== */
 .container{
 width:min(1200px,90%);
 margin:auto;
+position:relative;
 }
 
-/* header */
+/* ===== Header ===== */
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:25px 0;
-animation:fadeDown .8s ease;
+position:sticky;
+top:0;
+backdrop-filter:blur(10px);
+background:rgba(0,0,0,0.4);
+z-index:10;
 }
 
 .logo{
 font-size:28px;
 font-weight:900;
 color:#ff174f;
-letter-spacing:1px;
+letter-spacing:2px;
 }
 
-/* NAV */
 nav{
 display:flex;
-gap:15px;
+gap:18px;
 align-items:center;
 }
 
 nav a{
-text-decoration:none;
 color:white;
+text-decoration:none;
 opacity:.7;
 font-weight:600;
 transition:.3s;
@@ -84,68 +99,60 @@ opacity:1;
 transform:translateY(-2px);
 }
 
-/* instagram button */
-.insta-btn{
+.insta{
 padding:10px 16px;
 border-radius:12px;
 background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
-color:white;
 font-weight:800;
-text-decoration:none;
-box-shadow:0 0 25px rgba(255,0,100,.25);
-transition:.3s;
+box-shadow:0 0 20px rgba(255,0,100,.25);
 }
 
-.insta-btn:hover{
-transform:scale(1.05);
-}
-
-/* HERO */
+/* ===== HERO ===== */
 .hero{
 min-height:90vh;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 text-align:center;
 }
 
 .hero h1{
-font-size:clamp(50px,8vw,120px);
+font-size:clamp(45px,8vw,110px);
 font-weight:900;
 animation:fadeUp 1s ease;
 }
 
 .hero span{
 color:#ff174f;
+text-shadow:0 0 25px #ff174f;
 }
 
 .hero p{
+color:#bbb;
 max-width:700px;
 margin:20px auto;
-color:#bbb;
-font-size:18px;
 animation:fadeUp 1.2s ease;
 }
 
 .btn{
 display:inline-block;
 margin-top:25px;
-padding:16px 34px;
+padding:16px 40px;
 background:#ff174f;
 color:white;
-text-decoration:none;
 border-radius:14px;
+text-decoration:none;
 font-weight:800;
 transition:.3s;
-animation:fadeUp 1.4s ease;
-box-shadow:0 0 25px rgba(255,23,79,.35);
+box-shadow:0 0 30px rgba(255,23,79,.4);
 }
 
 .btn:hover{
-transform:translateY(-5px) scale(1.05);
+transform:scale(1.08);
+box-shadow:0 0 50px rgba(255,23,79,.7);
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 .section{
 padding:90px 0;
 opacity:0;
@@ -160,26 +167,27 @@ transform:translateY(0);
 
 .title{
 text-align:center;
-font-size:42px;
+font-size:40px;
 margin-bottom:50px;
 font-weight:900;
 }
 
-/* CARDS */
+/* ===== CARDS ===== */
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 }
 
 .card{
-background:#111;
+background:rgba(255,255,255,0.03);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.08);
 padding:30px;
 border-radius:18px;
-border:1px solid #222;
 transition:.4s;
-opacity:0;
 transform:translateY(20px);
+opacity:0;
 }
 
 .card.show{
@@ -188,9 +196,9 @@ transform:translateY(0);
 }
 
 .card:hover{
-transform:translateY(-12px) scale(1.03);
+transform:translateY(-12px) scale(1.04);
 border-color:#ff174f;
-box-shadow:0 10px 30px rgba(255,23,79,.2);
+box-shadow:0 10px 40px rgba(255,23,79,.25);
 }
 
 .card h3{
@@ -203,7 +211,7 @@ color:#aaa;
 line-height:1.6;
 }
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer{
 text-align:center;
 padding:40px;
@@ -212,60 +220,57 @@ border-top:1px solid #222;
 margin-top:60px;
 }
 
-/* animations */
+/* ===== Animations ===== */
 @keyframes fadeUp{
-from{opacity:0; transform:translateY(40px);}
-to{opacity:1; transform:translateY(0);}
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
 }
 
-@keyframes fadeDown{
-from{opacity:0; transform:translateY(-30px);}
-to{opacity:1; transform:translateY(0);}
-}
-
-/* floating whatsapp */
+/* ===== WhatsApp ===== */
 .float{
 position:fixed;
 bottom:20px;
 right:20px;
 background:#25D366;
-color:white;
 padding:14px 16px;
 border-radius:50px;
 font-weight:800;
 text-decoration:none;
-box-shadow:0 0 20px rgba(0,255,120,.3);
+color:white;
+box-shadow:0 0 25px rgba(0,255,120,.3);
 transition:.3s;
 }
 
 .float:hover{
 transform:scale(1.1);
 }
-
 </style>
 </head>
 
 <body>
 
+<div class="bg">
 <div class="glow"></div>
+<div class="glow"></div>
+</div>
 
 <div class="container">
 
 <header>
-<div class="logo">AYHAM</div>
+<div class="logo">AYHAM ELITE</div>
 
 <nav>
 <a href="#programs">Programs</a>
 <a href="#nutrition">Nutrition</a>
-<a class="insta-btn" href="https://instagram.com/2yhamm" target="_blank">Instagram</a>
+<a class="insta" href="https://instagram.com/2yhamm" target="_blank">Instagram</a>
 </nav>
 </header>
 
 <section class="hero">
 <div>
-<h1>Build Your <span>Elite Body</span></h1>
-<p>Professional coaching for muscle gain, fat loss, and performance optimization.</p>
-<a href="#programs" class="btn">Start Now</a>
+<h1>BUILD <span>ELITE BODY</span></h1>
+<p>Train like a beast. Eat like a pro. Become unstoppable.</p>
+<a href="#programs" class="btn">ENTER SYSTEM</a>
 </div>
 </section>
 
@@ -273,9 +278,9 @@ transform:scale(1.1);
 <h2 class="title">Training Programs</h2>
 
 <div class="cards">
-<div class="card"><h3>Beginner</h3><p>Start your fitness journey correctly.</p></div>
-<div class="card"><h3>Muscle Gain</h3><p>Build size with science-based training.</p></div>
-<div class="card"><h3>Fat Loss</h3><p>Burn fat while keeping muscle.</p></div>
+<div class="card"><h3>Beginner</h3><p>Start strong with smart fundamentals.</p></div>
+<div class="card"><h3>Hypertrophy</h3><p>Maximum muscle growth system.</p></div>
+<div class="card"><h3>Fat Burn</h3><p>Cut fat while keeping strength.</p></div>
 </div>
 </section>
 
@@ -283,14 +288,14 @@ transform:scale(1.1);
 <h2 class="title">Nutrition Plans</h2>
 
 <div class="cards">
-<div class="card"><h3>Cutting</h3><p>Lose fat with smart dieting.</p></div>
-<div class="card"><h3>Bulking</h3><p>Clean muscle gain nutrition.</p></div>
-<div class="card"><h3>Tracking</h3><p>Master calories & macros.</p></div>
+<div class="card"><h3>Cutting</h3><p>Lean body definition plan.</p></div>
+<div class="card"><h3>Bulking</h3><p>Clean mass gain strategy.</p></div>
+<div class="card"><h3>Tracking</h3><p>Macros & calories control system.</p></div>
 </div>
 </section>
 
 <footer>
-© 2026 Ayham Fitness Pro
+© 2026 Ayham Elite Fitness
 </footer>
 
 <a class="float" href="https://wa.me/962799954369" target="_blank">WhatsApp</a>
