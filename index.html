@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ayham Fitness Elite</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
+html {
+    scroll-behavior: smooth;
+}
+
 *{
 margin:0;
 padding:0;
@@ -41,7 +45,7 @@ z-index:-1;
 
 /* ===== HEADER ===== */
 .container{
-width:min(1200px,90%);
+width:min(1200px,93%);
 margin:auto;
 position:relative;
 }
@@ -67,7 +71,7 @@ letter-spacing:2px;
 
 nav{
 display:flex;
-gap:18px;
+gap:22px;
 align-items:center;
 }
 
@@ -85,15 +89,16 @@ transform:translateY(-2px);
 }
 
 .insta{
-padding:10px 16px;
+padding:10px 18px;
 border-radius:12px;
 background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
 font-weight:800;
+opacity: 1;
 }
 
 /* ===== HERO ===== */
 .hero{
-min-height:90vh;
+min-height:75vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -101,19 +106,21 @@ text-align:center;
 }
 
 .hero h1{
-font-size:clamp(45px,8vw,110px);
+font-size:clamp(40px,7vw,95px);
 font-weight:900;
+letter-spacing: -1px;
 }
 
 .hero span{
 color:#ff174f;
-text-shadow:0 0 25px #ff174f;
+text-shadow:0 0 25px rgba(255, 23, 79, 0.6);
 }
 
 .hero p{
 color:#bbb;
 max-width:700px;
 margin:20px auto;
+font-size: 18px;
 }
 
 .btn{
@@ -125,82 +132,175 @@ color:white;
 border-radius:14px;
 text-decoration:none;
 font-weight:800;
+transition: 0.3s;
+}
+.btn:hover {
+    background: #e01243;
+    transform: translateY(-2px);
+    box-shadow:0 5px 20px rgba(255,23,79,.4);
 }
 
 /* ===== SECTIONS ===== */
 .section{
-padding:90px 0;
+padding:70px 0;
 opacity:0;
-transform:translateY(80px) scale(0.95);
-filter:blur(10px);
-transition:1s;
-cursor:pointer;
+transform:translateY(50px);
+filter:blur(5px);
+transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .section.show{
 opacity:1;
-transform:translateY(0) scale(1);
+transform:translateY(0);
 filter:blur(0);
 }
 
 .title{
-text-align:center;
-font-size:40px;
-margin-bottom:50px;
+text-align:left;
+font-size:32px;
+margin-bottom:40px;
 font-weight:900;
+letter-spacing: -0.5px;
+border-left: 4px solid #ff174f;
+padding-left: 15px;
 }
 
-/* ===== CARDS ===== */
+/* ===== CARDS (NEW LAYOUT FROM IMAGE_2.PNG) ===== */
 .cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+display:flex;
+flex-direction: column;
+gap:25px;
 }
 
 .card{
-background:rgba(255,255,255,0.03);
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,0.08);
-padding:30px;
-border-radius:18px;
-transition:.4s;
+background: rgba(15, 15, 15, 0.65);
+backdrop-filter:blur(12px);
+border: 1px solid rgba(255,255,255,0.05);
+padding: 35px;
+border-radius: 20px;
+transition: .4s cubic-bezier(0.16, 1, 0.3, 1);
+display: flex;
+flex-direction: column;
+gap: 20px;
+position: relative;
 }
 
 .card:hover{
-transform:translateY(-12px) scale(1.04);
-border-color:#ff174f;
-box-shadow:0 10px 40px rgba(255,23,79,.25);
+border-color: rgba(255, 23, 79, 0.3);
+box-shadow:0 15px 50px rgba(0, 0, 0, 0.5);
+background: rgba(20, 20, 20, 0.8);
 }
 
-.card h3{
-color:#ff174f;
-margin-bottom:10px;
+.card-badge {
+    align-self: flex-start;
+    padding: 5px 14px;
+    border: 1px solid rgba(255, 23, 79, 0.4);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #ff174f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.card p{
-color:#aaa;
-line-height:1.6;
+.card-info h3{
+font-size: 28px;
+font-weight: 800;
+color: #ffffff;
+margin-bottom: 6px;
 }
 
-/* DOWNLOAD BUTTON */
+.card-info p{
+color:#888;
+font-size: 15px;
+font-weight: 400;
+}
+
+/* Grid specs from image_2.png */
+.card-specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.spec-item:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.spec-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #555;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.spec-value {
+    font-size: 16px;
+    color: #ddd;
+    font-weight: 600;
+}
+
+/* DOWNLOAD BUTTON (NEW DESIGN) */
 .download{
-display:inline-block;
-margin-top:15px;
-padding:10px 18px;
-background:#ff174f;
-color:white;
-border-radius:10px;
-text-decoration:none;
-font-weight:700;
+display:flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+width: 100%;
+padding: 14px;
+background: rgba(255, 255, 255, 0.03);
+border: 1px solid rgba(255, 255, 255, 0.08);
+color: #eee;
+border-radius: 12px;
+text-decoration: none;
+font-weight: 600;
+font-size: 15px;
+transition: .3s;
+}
+
+.download:hover{
+background: #ffffff;
+color: #050505;
+border-color: #ffffff;
+font-weight: 700;
 }
 
 /* FOOTER */
 footer{
 text-align:center;
 padding:40px;
-color:#777;
-border-top:1px solid #222;
-margin-top:60px;
+color:#555;
+border-top:1px solid #111;
+margin-top:80px;
+font-size: 14px;
+}
+
+/* Responsive adjustment for specs on small mobiles */
+@media (max-width: 480px) {
+    .card {
+        padding: 25px 20px;
+    }
+    .card-specs {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        text-align: left;
+        padding: 15px 5px;
+    }
+    .spec-item:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 10px;
+    }
 }
 </style>
 </head>
@@ -230,45 +330,147 @@ margin-top:60px;
 </div>
 </section>
 
-<section class="section" id="programs" onclick="openSection('programs')">
+<!-- TRAINING PROGRAMS SECTION -->
+<section class="section" id="programs">
 <h2 class="title">Training Programs</h2>
 
 <div class="cards">
-<div class="card">
-<h3>Beginner</h3>
-<p>Start strong fundamentals.</p>
-<a class="download" href="files/beginner.pdf" download>Download</a>
-</div>
+    <!-- Card 1 -->
+    <div class="card">
+        <div class="card-badge">Beginner</div>
+        <div class="card-info">
+            <h3>Beginner</h3>
+            <p>Start strong fundamentals.</p>
+        </div>
+        <div class="card-specs">
+            <div class="spec-item">
+                <span class="spec-label">Days</span>
+                <span class="spec-value">3–4</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Level</span>
+                <span class="spec-value">Beginner</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Type</span>
+                <span class="spec-value">Full Body</span>
+            </div>
+        </div>
+        <a class="download" href="files/beginner.pdf" download>
+            <span>↓</span> Download
+        </a>
+    </div>
 
-<div class="card">
-<h3>Hypertrophy</h3>
-<p>Muscle growth system.</p>
-<a class="download" href="files/bulking.pdf" download>Download</a>
-</div>
+    <!-- Card 2 -->
+    <div class="card">
+        <div class="card-badge">Hypertrophy</div>
+        <div class="card-info">
+            <h3>Hypertrophy</h3>
+            <p>Muscle growth system.</p>
+        </div>
+        <div class="card-specs">
+            <div class="spec-item">
+                <span class="spec-label">Days</span>
+                <span class="spec-value">4–5</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Level</span>
+                <span class="spec-value">Intermediate</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Type</span>
+                <span class="spec-value">Push Pull Legs</span>
+            </div>
+        </div>
+        <a class="download" href="files/bulking.pdf" download>
+            <span>↓</span> Download
+        </a>
+    </div>
 
-<div class="card">
-<h3>Fat Burn</h3>
-<p>Cut fat & keep muscle.</p>
-<a class="download" href="files/fatloss.pdf" download>Download</a>
-</div>
+    <!-- Card 3 -->
+    <div class="card">
+        <div class="card-badge">Fat Burn</div>
+        <div class="card-info">
+            <h3>Fat Burn</h3>
+            <p>Cut fat & keep muscle.</p>
+        </div>
+        <div class="card-specs">
+            <div class="spec-item">
+                <span class="spec-label">Days</span>
+                <span class="spec-value">4–6</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Level</span>
+                <span class="spec-value">All Levels</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Type</span>
+                <span class="spec-value">Full Body</span>
+            </div>
+        </div>
+        <a class="download" href="files/fatloss.pdf" download>
+            <span>↓</span> Download
+        </a>
+    </div>
 </div>
 </section>
 
+<!-- NUTRITION SECTION -->
 <section class="section" id="nutrition">
 <h2 class="title">Nutrition Plans</h2>
 
 <div class="cards">
-<div class="card">
-<h3>Cutting</h3>
-<p>Lean body plan.</p>
-<a class="download" href="files/cutting.pdf" download>Download</a>
-</div>
+    <!-- Nutrition Card 1 -->
+    <div class="card">
+        <div class="card-badge">Fat Loss</div>
+        <div class="card-info">
+            <h3>Cutting Plan</h3>
+            <p>Lean body, sharp definitions.</p>
+        </div>
+        <div class="card-specs">
+            <div class="spec-item">
+                <span class="spec-label">Goal</span>
+                <span class="spec-value">Deficit</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Focus</span>
+                <span class="spec-value">Fat Loss</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Type</span>
+                <span class="spec-value">High Protein</span>
+            </div>
+        </div>
+        <a class="download" href="files/cutting.pdf" download>
+            <span>↓</span> Download Plan
+        </a>
+    </div>
 
-<div class="card">
-<h3>Bulking</h3>
-<p>Clean mass gain.</p>
-<a class="download" href="files/bulking.pdf" download>Download</a>
-</div>
+    <!-- Nutrition Card 2 -->
+    <div class="card">
+        <div class="card-badge">Mass Gain</div>
+        <div class="card-info">
+            <h3>Bulking Plan</h3>
+            <p>Clean mass gain with minimal fat.</p>
+        </div>
+        <div class="card-specs">
+            <div class="spec-item">
+                <span class="spec-label">Goal</span>
+                <span class="spec-value">Surplus</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Focus</span>
+                <span class="spec-value">Muscle Mass</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Type</span>
+                <span class="spec-value">Clean Bulking</span>
+            </div>
+        </div>
+        <a class="download" href="files/bulking.pdf" download>
+            <span>↓</span> Download Plan
+        </a>
+    </div>
 </div>
 </section>
 
@@ -288,38 +490,37 @@ if(entry.isIntersecting){
 entry.target.classList.add('show');
 }
 });
-},{threshold:0.15});
+},{threshold:0.1});
 
 sections.forEach(s=>observer.observe(s));
 
-// click scroll
-function openSection(id){
-document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
 
-// ===== PARTICLES =====
+// ===== PARTICLES WITH RESIZE FIX =====
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
 
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+function resizeCanvas() {
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
 let particles=[];
 
-for(let i=0;i<80;i++){
+for(let i=0;i<60;i++){
 particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2,
-dx:(Math.random()-0.5),
-dy:(Math.random()-0.5)
+x:Math.random()*window.innerWidth,
+y:Math.random()*window.innerHeight,
+r:Math.random()*1.8,
+dx:(Math.random()-0.5)*0.6,
+dy:(Math.random()-0.5)*0.6
 });
 }
 
 function animate(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle="#ff174f";
+ctx.fillStyle="rgba(255, 23, 79, 0.8)";
 
 particles.forEach(p=>{
 ctx.beginPath();
