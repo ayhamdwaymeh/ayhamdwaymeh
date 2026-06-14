@@ -10,6 +10,7 @@
 <style>
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* يمنع اختفاء العناوين خلف الهيدر عند التنقل */
 }
 
 *{
@@ -41,6 +42,7 @@ left:0;
 width:100%;
 height:100%;
 z-index:-1;
+pointer-events: none;
 }
 
 /* ===== HEADER ===== */
@@ -54,24 +56,27 @@ header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 0;
+padding:20px 0;
 position:sticky;
 top:0;
-backdrop-filter:blur(10px);
-background:rgba(0,0,0,0.4);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+background:rgba(5, 5, 5, 0.6);
 z-index:10;
+border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .logo{
-font-size:28px;
+font-size:26px;
 font-weight:900;
 color:#ff174f;
-letter-spacing:2px;
+letter-spacing:1.5px;
+text-shadow: 0 0 15px rgba(255, 23, 79, 0.3);
 }
 
 nav{
 display:flex;
-gap:22px;
+gap:24px;
 align-items:center;
 }
 
@@ -80,25 +85,31 @@ color:white;
 text-decoration:none;
 opacity:.7;
 font-weight:600;
-transition:.3s;
+transition:.3s ease;
 }
 
 nav a:hover{
 opacity:1;
-transform:translateY(-2px);
+transform:translateY(-1px);
 }
 
 .insta{
-padding:10px 18px;
+padding:10px 20px;
 border-radius:12px;
 background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
 font-weight:800;
-opacity: 1;
+opacity: 1 !important;
+transition: .3s transform ease;
+}
+
+.insta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(214, 41, 118, 0.4);
 }
 
 /* ===== HERO ===== */
 .hero{
-min-height:75vh;
+min-height:80vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -106,46 +117,50 @@ text-align:center;
 }
 
 .hero h1{
-font-size:clamp(40px,7vw,95px);
+font-size:clamp(42px,7.5vw,90px);
 font-weight:900;
-letter-spacing: -1px;
+letter-spacing: -1.5px;
+line-height: 1.1;
 }
 
 .hero span{
 color:#ff174f;
-text-shadow:0 0 25px rgba(255, 23, 79, 0.6);
+text-shadow:0 0 30px rgba(255, 23, 79, 0.5);
 }
 
 .hero p{
 color:#bbb;
-max-width:700px;
-margin:20px auto;
+max-width:650px;
+margin:24px auto;
 font-size: 18px;
+line-height: 1.6;
 }
 
 .btn{
 display:inline-block;
-margin-top:25px;
-padding:16px 40px;
+margin-top:15px;
+padding:16px 45px;
 background:#ff174f;
 color:white;
 border-radius:14px;
 text-decoration:none;
 font-weight:800;
-transition: 0.3s;
+transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+box-shadow:0 4px 15px rgba(255,23,79,.2);
 }
+
 .btn:hover {
     background: #e01243;
-    transform: translateY(-2px);
-    box-shadow:0 5px 20px rgba(255,23,79,.4);
+    transform: translateY(-3px);
+    box-shadow:0 8px 25px rgba(255,23,79,.5);
 }
 
 /* ===== SECTIONS ===== */
 .section{
-padding:70px 0;
+padding:90px 0 40px 0;
 opacity:0;
-transform:translateY(50px);
-filter:blur(5px);
+transform:translateY(40px);
+filter:blur(4px);
 transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -157,44 +172,47 @@ filter:blur(0);
 
 .title{
 text-align:left;
-font-size:32px;
-margin-bottom:40px;
+font-size:34px;
+margin-bottom:45px;
 font-weight:900;
 letter-spacing: -0.5px;
 border-left: 4px solid #ff174f;
-padding-left: 15px;
+padding-left: 18px;
 }
 
-/* ===== CARDS (NEW LAYOUT FROM IMAGE_2.PNG) ===== */
+/* ===== CARDS GRID SYSTEM (UPDATED) ===== */
 .cards{
-display:flex;
-flex-direction: column;
-gap:25px;
+display:grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+gap:30px;
 }
 
 .card{
-background: rgba(15, 15, 15, 0.65);
+background: rgba(15, 15, 15, 0.55);
 backdrop-filter:blur(12px);
-border: 1px solid rgba(255,255,255,0.05);
+-webkit-backdrop-filter:blur(12px);
+border: 1px solid rgba(255,255,255,0.04);
 padding: 35px;
-border-radius: 20px;
+border-radius: 22px;
 transition: .4s cubic-bezier(0.16, 1, 0.3, 1);
 display: flex;
 flex-direction: column;
-gap: 20px;
+gap: 24px;
 position: relative;
 }
 
 .card:hover{
-border-color: rgba(255, 23, 79, 0.3);
-box-shadow:0 15px 50px rgba(0, 0, 0, 0.5);
-background: rgba(20, 20, 20, 0.8);
+border-color: rgba(255, 23, 79, 0.35);
+box-shadow:0 20px 40px rgba(0, 0, 0, 0.6);
+background: rgba(20, 20, 20, 0.75);
+transform: translateY(-4px);
 }
 
 .card-badge {
     align-self: flex-start;
-    padding: 5px 14px;
-    border: 1px solid rgba(255, 23, 79, 0.4);
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 23, 79, 0.3);
+    background: rgba(255, 23, 79, 0.05);
     border-radius: 20px;
     font-size: 11px;
     font-weight: 700;
@@ -204,26 +222,28 @@ background: rgba(20, 20, 20, 0.8);
 }
 
 .card-info h3{
-font-size: 28px;
+font-size: 26px;
 font-weight: 800;
 color: #ffffff;
-margin-bottom: 6px;
+margin-bottom: 8px;
 }
 
 .card-info p{
-color:#888;
+color:#999;
 font-size: 15px;
 font-weight: 400;
+line-height: 1.4;
 }
 
-/* Grid specs from image_2.png */
+/* Grid specs */
 .card-specs {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 20px 0;
+    padding: 22px 0;
     text-align: center;
+    margin-top: auto; /* يدفع الخصائص والزر لأسفل الكارت ليصبح التصميم متناسق */
 }
 
 .spec-item {
@@ -239,33 +259,33 @@ font-weight: 400;
 .spec-label {
     font-size: 11px;
     text-transform: uppercase;
-    color: #555;
+    color: #666;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
 .spec-value {
     font-size: 16px;
-    color: #ddd;
+    color: #eee;
     font-weight: 600;
 }
 
-/* DOWNLOAD BUTTON (NEW DESIGN) */
+/* DOWNLOAD BUTTON */
 .download{
 display:flex;
 align-items: center;
 justify-content: center;
-gap: 8px;
+gap: 10px;
 width: 100%;
-padding: 14px;
+padding: 15px;
 background: rgba(255, 255, 255, 0.03);
-border: 1px solid rgba(255, 255, 255, 0.08);
+border: 1px solid rgba(255, 255, 255, 0.07);
 color: #eee;
-border-radius: 12px;
+border-radius: 14px;
 text-decoration: none;
 font-weight: 600;
 font-size: 15px;
-transition: .3s;
+transition: .3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .download:hover{
@@ -273,22 +293,24 @@ background: #ffffff;
 color: #050505;
 border-color: #ffffff;
 font-weight: 700;
+box-shadow: 0 10px 20px rgba(255,255,255,0.1);
 }
 
 /* FOOTER */
 footer{
 text-align:center;
-padding:40px;
-color:#555;
-border-top:1px solid #111;
-margin-top:80px;
+padding:50px 20px;
+color:#444;
+border-top:1px solid rgba(255,255,255,0.02);
+margin-top:100px;
 font-size: 14px;
+letter-spacing: 0.5px;
 }
 
-/* Responsive adjustment for specs on small mobiles */
+/* Responsive adjustment */
 @media (max-width: 480px) {
     .card {
-        padding: 25px 20px;
+        padding: 30px 20px;
     }
     .card-specs {
         grid-template-columns: 1fr;
@@ -296,10 +318,15 @@ font-size: 14px;
         text-align: left;
         padding: 15px 5px;
     }
+    .spec-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
     .spec-item:not(:last-child) {
         border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        padding-bottom: 12px;
     }
 }
 </style>
@@ -340,7 +367,7 @@ font-size: 14px;
         <div class="card-badge">Beginner</div>
         <div class="card-info">
             <h3>Beginner</h3>
-            <p>Start strong fundamentals.</p>
+            <p>Start strong with fundamental gym movements and build a solid foundation.</p>
         </div>
         <div class="card-specs">
             <div class="spec-item">
@@ -357,7 +384,7 @@ font-size: 14px;
             </div>
         </div>
         <a class="download" href="files/beginner.pdf" download>
-            <span>↓</span> Download
+            <span>↓</span> Download Program
         </a>
     </div>
 
@@ -366,7 +393,7 @@ font-size: 14px;
         <div class="card-badge">Hypertrophy</div>
         <div class="card-info">
             <h3>Hypertrophy</h3>
-            <p>Muscle growth system.</p>
+            <p>Advanced muscle growth system designed to optimize volume and recovery.</p>
         </div>
         <div class="card-specs">
             <div class="spec-item">
@@ -379,11 +406,11 @@ font-size: 14px;
             </div>
             <div class="spec-item">
                 <span class="spec-label">Type</span>
-                <span class="spec-value">Push Pull Legs</span>
+                <span class="spec-value">PPL</span>
             </div>
         </div>
         <a class="download" href="files/bulking.pdf" download>
-            <span>↓</span> Download
+            <span>↓</span> Download Program
         </a>
     </div>
 
@@ -392,7 +419,7 @@ font-size: 14px;
         <div class="card-badge">Fat Burn</div>
         <div class="card-info">
             <h3>Fat Burn</h3>
-            <p>Cut fat & keep muscle.</p>
+            <p>High intensity routine to shred body fat while maintaining lean muscle mass.</p>
         </div>
         <div class="card-specs">
             <div class="spec-item">
@@ -409,7 +436,7 @@ font-size: 14px;
             </div>
         </div>
         <a class="download" href="files/fatloss.pdf" download>
-            <span>↓</span> Download
+            <span>↓</span> Download Program
         </a>
     </div>
 </div>
@@ -425,7 +452,7 @@ font-size: 14px;
         <div class="card-badge">Fat Loss</div>
         <div class="card-info">
             <h3>Cutting Plan</h3>
-            <p>Lean body, sharp definitions.</p>
+            <p>Caloric deficit strategy focused on lean body metrics and sharp definition.</p>
         </div>
         <div class="card-specs">
             <div class="spec-item">
@@ -451,7 +478,7 @@ font-size: 14px;
         <div class="card-badge">Mass Gain</div>
         <div class="card-info">
             <h3>Bulking Plan</h3>
-            <p>Clean mass gain with minimal fat.</p>
+            <p>Structured surplus protocol for maximum muscle mass with minimal fat gain.</p>
         </div>
         <div class="card-specs">
             <div class="spec-item">
@@ -464,7 +491,7 @@ font-size: 14px;
             </div>
             <div class="spec-item">
                 <span class="spec-label">Type</span>
-                <span class="spec-value">Clean Bulking</span>
+                <span class="spec-value">Clean Bulk</span>
             </div>
         </div>
         <a class="download" href="files/bulking.pdf" download>
@@ -475,7 +502,7 @@ font-size: 14px;
 </section>
 
 <footer>
-© 2026 Ayham Elite Fitness
+© 2026 Ayham Elite Fitness. All Rights Reserved.
 </footer>
 
 </div>
@@ -495,28 +522,33 @@ entry.target.classList.add('show');
 sections.forEach(s=>observer.observe(s));
 
 
-// ===== PARTICLES WITH RESIZE FIX =====
+// ===== PARTICLES WITH SEAMLESS RESIZE FIX =====
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
+
+let particles=[];
 
 function resizeCanvas() {
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight;
+    initParticles(); // إعادة توزيع الجزيئات لتناسب الأبعاد الجديدة دون مشاكل
 }
-resizeCanvas();
+
+function initParticles() {
+    particles = [];
+    for(let i=0;i<60;i++){
+        particles.push({
+            x:Math.random()*canvas.width,
+            y:Math.random()*canvas.height,
+            r:Math.random()*1.8,
+            dx:(Math.random()-0.5)*0.6,
+            dy:(Math.random()-0.5)*0.6
+        });
+    }
+}
+
 window.addEventListener('resize', resizeCanvas);
-
-let particles=[];
-
-for(let i=0;i<60;i++){
-particles.push({
-x:Math.random()*window.innerWidth,
-y:Math.random()*window.innerHeight,
-r:Math.random()*1.8,
-dx:(Math.random()-0.5)*0.6,
-dy:(Math.random()-0.5)*0.6
-});
-}
+resizeCanvas(); // التشغيل الأول عند تحميل الصفحة
 
 function animate(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
