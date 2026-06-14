@@ -1,36 +1,164 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Website</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AYHAM DWAYMEH</title>
 
 <style>
-body{
+*{
 margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#000;
-color:white;
-font-family:Arial;
-text-align:center;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
-h1{
-font-size:50px;
+body{
+background:#050505;
+color:white;
+}
+
+header{
+padding:25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #222;
+}
+
+.logo{
+font-size:30px;
+font-weight:bold;
 color:#ff174f;
 }
-</style>
 
+.insta{
+background:#ff174f;
+color:white;
+padding:12px 20px;
+border-radius:10px;
+text-decoration:none;
+}
+
+.hero{
+text-align:center;
+padding:100px 20px;
+}
+
+.hero h1{
+font-size:70px;
+margin-bottom:20px;
+}
+
+.hero span{
+color:#ff174f;
+}
+
+.hero p{
+font-size:22px;
+color:#ccc;
+max-width:700px;
+margin:auto;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+padding:50px 10%;
+}
+
+.card{
+background:#111;
+border:1px solid #222;
+border-radius:20px;
+padding:30px;
+text-align:center;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:#ff174f;
+}
+
+.icon{
+font-size:60px;
+margin-bottom:20px;
+}
+
+.card h2{
+margin-bottom:15px;
+color:#ff174f;
+}
+
+footer{
+text-align:center;
+padding:40px;
+color:#888;
+border-top:1px solid #222;
+margin-top:50px;
+}
+</style>
 </head>
 <body>
 
-<div>
-<h1>موقعي شغال 🔥</h1>
-<p>تم رفع الموقع بنجاح على GitHub Pages</p>
+<header>
+<div class="logo">AYHAM DWAYMEH</div>
+
+<a class="insta" href="https://instagram.com/2yhamm" target="_blank">
+Instagram
+</a>
+</header>
+
+<section class="hero">
+<h1>Build Muscle With <span>Science</span></h1>
+
+<p>
+Arabic & English Fitness Coaching
+Training Programs • Nutrition Plans • Progress Tracking
+</p>
+</section>
+
+<section class="cards">
+
+<div class="card">
+<div class="icon">🏋️</div>
+<h2>Training Programs</h2>
+<p>
+Workout plans for beginners and advanced athletes.
+</p>
 </div>
+
+<div class="card">
+<div class="icon">🥗</div>
+<h2>Nutrition Plans</h2>
+<p>
+Bulking and cutting meal plans with calorie guidance.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">📈</div>
+<h2>Progress Tracking</h2>
+<p>
+Track your weight, strength and body measurements.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🌍</div>
+<h2>English & Arabic</h2>
+<p>
+Support and coaching available in both languages.
+</p>
+</div>
+
+</section>
+
+<footer>
+© 2026 AYHAM DWAYMEH
+</footer>
 
 </body>
 </html>
