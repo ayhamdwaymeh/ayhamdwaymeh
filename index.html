@@ -153,7 +153,7 @@ align-items:center;
 .sidebar {
     position: fixed;
     top: 0;
-    right: -300px; /* مخفي افتراضياً بجهة اليمين */
+    right: -300px;
     width: 300px;
     height: 100vh;
     background: rgba(10, 10, 10, 0.95);
@@ -167,7 +167,6 @@ align-items:center;
     transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* تعديل اتجاه القائمة الجانبية عند قلب اللغة للعربية لفتحها من اليسار */
 body.rtl .sidebar {
     right: auto;
     left: -300px;
@@ -224,7 +223,6 @@ body.rtl .sidebar-links a:hover {
     padding-right: 8px;
 }
 
-/* القناع الخلفي عند فتح المنيو */
 .sidebar-overlay {
     position: fixed;
     top: 0;
@@ -367,7 +365,6 @@ font-size: 15px;
 font-weight: 400;
 }
 
-/* Grid specs */
 .card-specs {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -406,7 +403,6 @@ body.rtl .spec-item:not(:last-child) {
     font-weight: 600;
 }
 
-/* DOWNLOAD BUTTON */
 .download{
 display:flex;
 align-items: center;
@@ -431,21 +427,20 @@ border-color: #ffffff;
 font-weight: 700;
 }
 
-/* ===== الستايل الجديد والراقي لحاسبة السعرات الذكية (PREMIUM CALORIE CALCULATOR) ===== */
+/* ===== حاسبة الماكروز والسعرات المطورة والراقية ===== */
 .calc-premium-wrapper {
     background: linear-gradient(135deg, rgba(20, 5, 10, 0.6) 0%, rgba(10, 10, 10, 0.8) 100%);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 23, 79, 0.15);
     padding: 50px 40px;
     border-radius: 32px;
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
     box-shadow: 0 20px 50px rgba(0,0,0,0.6);
     position: relative;
     overflow: hidden;
 }
 
-/* تأثير إضاءة خلفي فخم داخل الحاسبة */
 .calc-premium-wrapper::before {
     content: '';
     position: absolute;
@@ -508,7 +503,6 @@ font-weight: 700;
     font-size: 16px;
 }
 
-/* زر الحساب المطور */
 .calc-btn-glow {
     background: #ff174f;
     color: white;
@@ -528,13 +522,12 @@ font-weight: 700;
     box-shadow: 0 12px 30px rgba(255,23,79,0.5);
 }
 
-/* صندوق عرض النتيجة الفاخر الدائري */
+/* لوحة عرض النتيجة والماكروز المقسمة بالتساوي */
 .premium-result-box {
     margin-top: 40px;
     padding-top: 35px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     display: none;
-    text-align: center;
     animation: fadeIn 0.5s ease;
 }
 
@@ -543,53 +536,67 @@ font-weight: 700;
     to { opacity: 1; transform: translateY(0); }
 }
 
-.circle-display {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,23,79,0.15) 0%, rgba(0,0,0,0) 70%);
-    border: 2px dashed rgba(255, 23, 79, 0.4);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 25px auto;
-    box-shadow: inset 0 0 30px rgba(255,23,79,0.1);
+/* شبكة توزيع الماكروز الأربعة */
+.macros-display-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
-.premium-number {
-    font-size: 40px;
+.macro-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 25px 15px;
+    text-align: center;
+    position: relative;
+    transition: 0.3s;
+}
+
+.macro-box:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* تمييز السعرات بلون الكابتن الفخم */
+.macro-box.calories-main {
+    border-color: rgba(255, 23, 79, 0.3);
+    background: linear-gradient(to bottom, rgba(255,23,79,0.05), transparent);
+}
+
+.macro-num {
+    font-size: 32px;
     font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.calories-main .macro-num {
     color: #ff174f;
-    text-shadow: 0 0 25px rgba(255, 23, 79, 0.5);
+    text-shadow: 0 0 20px rgba(255, 23, 79, 0.4);
 }
 
-.premium-unit {
-    font-size: 12px;
+.macro-label {
+    font-size: 11px;
     text-transform: uppercase;
-    color: #888;
-    font-weight: 700;
+    color: #666;
+    font-weight: 800;
     letter-spacing: 1px;
-}
-
-.premium-status-text {
-    font-size: 18px;
-    color: #eee;
-    font-weight: 600;
-    margin-bottom: 10px;
 }
 
 .premium-rec-text {
     font-size: 15px;
     color: #ff174f;
     font-weight: 700;
-    max-width: 600px;
+    max-width: 750px;
     margin: 0 auto;
     line-height: 1.6;
     background: rgba(255, 23, 79, 0.05);
     padding: 15px 25px;
     border-radius: 12px;
     border-left: 3px solid #ff174f;
+    text-align: center;
 }
 body.rtl .premium-rec-text {
     border-left: none;
@@ -607,6 +614,12 @@ font-size: 14px;
 }
 
 /* Responsive adjustment */
+@media (max-width: 800px) {
+    .macros-display-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 650px) {
     .calc-grid {
         grid-template-columns: 1fr;
@@ -617,6 +630,9 @@ font-size: 14px;
 }
 
 @media (max-width: 480px) {
+    .macros-display-grid {
+        grid-template-columns: 1fr;
+    }
     .card {
         padding: 25px 20px;
     }
@@ -644,17 +660,16 @@ font-size: 14px;
 <div class="bg"></div>
 <canvas id="particles"></canvas>
 
-<!-- القناع الخلفي للمنيو الجانبي -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<!-- المنيو الجانبي الذكي مبرمج بالكامل -->
+<!-- المنيو الجانبي المتكامل -->
 <div class="sidebar" id="sidebarMenu">
     <button class="sidebar-close" id="sidebarClose">✕</button>
     <ul class="sidebar-links">
         <li><a href="#" id="menuHome">Home</a></li>
         <li><a href="#programs" id="menuProg">Training Programs</a></li>
         <li><a href="#nutrition" id="menuNutri">Nutrition Plans</a></li>
-        <li><a href="#calculator" id="menuCalc">Calorie Calculator</a></li>
+        <li><a href="#calculator" id="menuCalc">Calorie & Macros Calculator</a></li>
     </ul>
 </div>
 
@@ -696,7 +711,6 @@ font-size: 14px;
 <h2 class="title" id="secTitle1">Training Programs</h2>
 
 <div class="cards">
-    <!-- Card 1 -->
     <div class="card">
         <div class="card-badge" id="b1">Beginner</div>
         <div class="card-info">
@@ -722,7 +736,6 @@ font-size: 14px;
         </a>
     </div>
 
-    <!-- Card 2 -->
     <div class="card">
         <div class="card-badge" id="b2">Hypertrophy</div>
         <div class="card-info">
@@ -748,7 +761,6 @@ font-size: 14px;
         </a>
     </div>
 
-    <!-- Card 3 -->
     <div class="card">
         <div class="card-badge" id="b3">Fat Burn</div>
         <div class="card-info">
@@ -781,7 +793,6 @@ font-size: 14px;
 <h2 class="title" id="secTitle2">Nutrition Plans</h2>
 
 <div class="cards">
-    <!-- Nutrition Card 1 -->
     <div class="card">
         <div class="card-badge" id="b4">Fat Loss</div>
         <div class="card-info">
@@ -807,7 +818,6 @@ font-size: 14px;
         </a>
     </div>
 
-    <!-- Nutrition Card 2 -->
     <div class="card">
         <div class="card-badge" id="b5">Mass Gain</div>
         <div class="card-info">
@@ -835,9 +845,9 @@ font-size: 14px;
 </div>
 </section>
 
-<!-- ================= حاسبة السعرات الفخمة والراقية في الأسفل بالظبط ================= -->
+<!-- ===== حاسبة السعرات والماكروز الاحترافية الذكية والمقسمة ===== -->
 <section class="section" id="calculator">
-<h2 class="title" id="calcTitle">Calorie Calculator</h2>
+<h2 class="title" id="calcTitle">Calorie & Macros Calculator</h2>
 
 <div class="calc-premium-wrapper">
     <div class="calc-grid">
@@ -854,6 +864,13 @@ font-size: 14px;
             <input type="number" id="age" placeholder="00">
         </div>
         <div class="input-card">
+            <label id="lblGoal">Fitness Goal</label>
+            <select id="goal">
+                <option value="cut" id="optCut">Fat Loss / Cutting</option>
+                <option value="bulk" id="optBulk">Muscle Gain / Bulking</option>
+            </select>
+        </div>
+        <div class="input-card" style="grid-column: span 2;">
             <label id="lblActivity">Activity Level</label>
             <select id="activity">
                 <option value="1.2" id="opt1">Sedentary (No exercise)</option>
@@ -865,15 +882,33 @@ font-size: 14px;
     </div>
     
     <div style="text-align: center;">
-        <button class="calc-btn-glow" id="btnCalculate" onclick="calculateCalories()">Calculate Calories</button>
+        <button class="calc-btn-glow" id="btnCalculate" onclick="calculateMacros()">Calculate Targets</button>
     </div>
 
+    <!-- لوحة توزيع الماكروز بعد الحساب -->
     <div class="premium-result-box" id="calcResult">
-        <div class="circle-display">
-            <div class="premium-number" id="caloriesValue">0</div>
-            <div class="premium-unit" id="caloriesUnit">Kcal / Day</div>
+        <div class="macros-display-grid">
+            <!-- كرت السعرات الرئيسي -->
+            <div class="macro-box calories-main">
+                <div class="macro-num" id="caloriesValue">0</div>
+                <div class="macro-label" id="lblResCalories">Calories</div>
+            </div>
+            <!-- كرت البروتين -->
+            <div class="macro-box">
+                <div class="macro-num" id="proteinValue">0g</div>
+                <div class="macro-label" id="lblResProtein">Protein</div>
+            </div>
+            <!-- كرت الكارب -->
+            <div class="macro-box">
+                <div class="macro-num" id="carbsValue">0g</div>
+                <div class="macro-label" id="lblResCarbs">Carbs</div>
+            </div>
+            <!-- كرت الدهون -->
+            <div class="macro-box">
+                <div class="macro-num" id="fatsValue">0g</div>
+                <div class="macro-label" id="lblResFats">Fats</div>
+            </div>
         </div>
-        <div class="premium-status-text" id="caloriesText">Daily Maintenance Calories</div>
         <p class="premium-rec-text" id="recommendationText"></p>
     </div>
 </div>
@@ -886,19 +921,17 @@ font-size: 14px;
 </div>
 
 <script>
-// جافاسكريبت متطور لإدارة الـ Sidebar وحساب السعرات والترجمة الكاملة باللغتين
+// التحكم بالمنيو الجانبي
 const sidebarOpen = document.getElementById('sidebarOpen');
 const sidebarClose = document.getElementById('sidebarClose');
 const sidebarMenu = document.getElementById('sidebarMenu');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-// فتح القائمة الجانبية
 sidebarOpen.addEventListener('click', () => {
     sidebarMenu.classList.add('open');
     sidebarOverlay.style.display = 'block';
 });
 
-// إغلاق القائمة الجانبية
 function closeMenu() {
     sidebarMenu.classList.remove('open');
     sidebarOverlay.style.display = 'none';
@@ -906,12 +939,11 @@ function closeMenu() {
 sidebarClose.addEventListener('click', closeMenu);
 sidebarOverlay.addEventListener('click', closeMenu);
 
-// الانتقال السلس عند الضغط على روابط المنيو واختفاء القائمة تلقائياً
 document.querySelectorAll('.sidebar-links a').forEach(link => {
     link.addEventListener('click', closeMenu);
 });
 
-
+// نظام الترجمة واللغات المتكامل
 const langToggle = document.getElementById('langToggle');
 const langText = document.getElementById('langText');
 
@@ -921,32 +953,33 @@ const translations = {
         heroTitle: 'BUILD <span>ELITE BODY</span>',
         heroDesc: "Train like a beast. Become unstoppable.",
         heroBtn: "ENTER SYSTEM",
-        calcTitle: "Calorie Calculator",
+        calcTitle: "Calorie & Macros Calculator",
         lblWeight: "Weight (kg)",
         lblHeight: "Height (cm)",
         lblAge: "Age",
+        lblGoal: "Fitness Goal",
+        optCut: "Fat Loss / Cutting",
+        optBulk: "Muscle Gain / Bulking",
         lblActivity: "Activity Level",
         opt1: "Sedentary (No exercise)",
         opt2: "Light (1-3 days/week)",
         opt3: "Moderate (3-5 days/week)",
         opt4: "Heavy (6-7 days/week)",
-        btnCalculate: "Calculate Calories",
-        caloriesText: "Daily Maintenance Calories",
-        caloriesUnit: "Kcal / Day",
+        btnCalculate: "Calculate Targets",
+        lblResCalories: "Calories",
+        lblResProtein: "Protein",
+        lblResCarbs: "Carbs",
+        lblResFats: "Fats",
         secTitle1: "Training Programs",
         secTitle2: "Nutrition Plans",
         footer: "© 2026 Ayham Elite Fitness",
-        // المنيو الجانبي
         menuHome: "Home", menuProg: "Training Programs", menuNutri: "Nutrition Plans", menuCalc: "Calorie Calculator",
-        // التوصيات الذكية
-        recBulk: "💡 Tip: To gain muscle mass (Bulking), eat around +500 calories extra! Scroll up and download the 'Bulking Plan'.",
-        recCut: "💡 Tip: To burn fat (Cutting), eat around -500 calories less! Scroll up and download the 'Cutting Plan'.",
+        recBulk: "💡 Coach Ayham's Tip: Targets set for clean muscle growth! We increased your Carbs & Calories. Scroll up and download the 'Bulking Plan' to start.",
+        recCut: "💡 Coach Ayham's Tip: Targets set for fat burning while protecting your muscles with high protein! Scroll up and download the 'Cutting Plan'.",
         alertField: "Please fill in all fields correctly!",
-        // كروت التمارين
         b1: "Beginner", t1: "Beginner", d1: "Start strong fundamentals.", lbl1_1: "Days", val1_1: "3–4", lbl1_2: "Level", val1_2: "Beginner", lbl1_3: "Type", val1_3: "Full Body", btn1: "↓ Download",
         b2: "Hypertrophy", t2: "Hypertrophy", d2: "Muscle growth system.", lbl2_1: "Days", val2_1: "4–5", lbl2_2: "Level", val2_2: "Intermediate", lbl2_3: "Type", val2_3: "Push Pull Legs", btn2: "↓ Download",
         b3: "Fat Burn", t3: "Fat Burn", d3: "Cut fat & keep muscle.", lbl3_1: "Days", val3_1: "4–6", lbl3_2: "Level", val3_2: "All Levels", lbl3_3: "Type", val3_3: "Full Body", btn3: "↓ Download",
-        // كروت التغذية
         b4: "Fat Loss", d4: "Lean body, sharp definitions.", lbl4_1: "Goal", val4_1: "Deficit", lbl4_2: "Focus", val4_2: "Fat Loss", lbl4_3: "Type", val4_3: "High Protein", btn4: "↓ Download Plan",
         b5: "Mass Gain", t5: "Bulking Plan", d5: "Clean mass gain with minimal fat.", lbl5_1: "Goal", val5_1: "Surplus", lbl5_2: "Focus", val5_2: "Muscle Mass", lbl5_3: "Type", val5_3: "Clean Bulking", btn5: "↓ Download Plan"
     },
@@ -955,32 +988,33 @@ const translations = {
         heroTitle: 'ابنِ <span>جسداً مثالياً</span>',
         heroDesc: "تمرّن كالأبطال. واصبح قوة لا يمكن إيقافها.",
         heroBtn: "دخول النظام",
-        calcTitle: "حاسبة السعرات الحرارية",
+        calcTitle: "حاسبة السعرات والماكروز الاحترافية",
         lblWeight: "الوزن (كيلو جرام)",
         lblHeight: "الطول (سم)",
         lblAge: "العمر",
+        lblGoal: "الهدف الرياضي",
+        optCut: "تنشيف وخسارة دهون",
+        optBulk: "تضخيم وبناء عضلات",
         lblActivity: "مستوى النشاط اليومي",
         opt1: "خامل (بدون تمارين وعمل مكتبي)",
         opt2: "نشاط خفيف (تمارين من 1-3 أيام/أسبوع)",
         opt3: "نشاط متوسط (تمارين من 3-5 أيام/أسبوع)",
         opt4: "نشاط عالي (تمارين من 6-7 أيام/أسبوع)",
-        btnCalculate: "احسب السعرات الآن",
-        caloriesText: "السعرات الحرارية اليومية للمحافظة",
-        caloriesUnit: "سعرة / يوم",
+        btnCalculate: "احسب الاحتياج والماكروز",
+        lblResCalories: "السعرات",
+        lblResProtein: "بروتين",
+        lblResCarbs: "كاربوهيدرات",
+        lblResFats: "دهون صحية",
         secTitle1: "البرامج التدريبية",
         secTitle2: "الأنظمة الغذائية",
         footer: "© 2026 أيهم إليت فيتنس. جميع الحقوق محفوظة.",
-        // المنيو الجانبي
         menuHome: "الرئيسية", menuProg: "البرامج التدريبية", menuNutri: "الخطط الغذائية", menuCalc: "حاسبة السعرات",
-        // التوصيات الذكية بالعربي
-        recBulk: "💡 نصيحة الكابتن أيهم: لزيادة كتلتك العضلية وضخامتك، ننصحك باستهلاك +500 سعرة إضافية فوق النتيجة. اصعد لأعلى وحمّل 'خطة التضخيم'.",
-        recCut: "💡 نصيحة الكابتن أيهم: لحرق الدهون والتنشيف، ننصحك بتقليل -500 سعرة من احتياجك الحالي. اصعد لأعلى وحمّل 'خطة التنشيف'.",
+        recBulk: "💡 نصيحة الكابتن أيهم: تم ضبط الأرقام للبناء العضلي الصافي! رفعنا الكاربوهيدرات لتوفير طاقة قصوى. اصعد لأعلى وحمّل 'خطة التضخيم'.",
+        recCut: "💡 نصيحة الكابتن أيهم: تم حساب العجز اللازم لحرق الدهون مع إبقاء البروتين عالياً لحماية عضلاتك من الهدم. اصعد لأعلى وحمّل 'خطة التنشيف'.",
         alertField: "الرجاء إدخال البيانات بشكل صحيح في جميع الحقول!",
-        // كروت التمارين
         b1: "مبتدئ", t1: "برنامج المبتدئين", d1: "ابدأ بقوة مع الأساسيات الصحيحة.", lbl1_1: "الأيام", val1_1: "3–4", lbl1_2: "المستوى", val1_2: "مبتدئ", lbl1_3: "النوع", val1_3: "جسم كامل", btn1: "↓ تحميل البرنامج",
         b2: "الضخامة", t2: "برنامج التضخيم", d2: "نظام متكامل للبناء العضلي.", lbl2_1: "الأيام", val2_1: "4–5", lbl2_2: "المستوى", val2_2: "متوسط", lbl2_3: "النوع", val2_3: "دفع سحب أرجل", btn2: "↓ تحميل البرنامج",
         b3: "حرق الدهون", t3: "برنامج التنشيف", d3: "احرق الدهون وحافظ على عضلاتك.", lbl3_1: "الأيام", val3_1: "4–6", lbl3_2: "المستوى", val3_2: "كل المستويات", lbl3_3: "النوع", val3_3: "جسم كامل", btn3: "↓ تحميل البرنامج",
-        // كروت التغذية
         b4: "خسارة وزن", d4: "جسم منسق، وتفاصيل عضلية واضحة.", lbl4_1: "الهدف", val4_1: "عجز سعرات", lbl4_2: "التركيز", val4_2: "حرق دهون", lbl4_3: "النوع", val4_3: "بروتين عالٍ", btn4: "↓ تحميل الخطة",
         b5: "زيادة وزن", t5: "خطة التضخيم", d5: "زيادة كتلة عضلية صافية بأقل دهون.", lbl5_1: "الهدف", val5_1: "فائض سعرات", lbl5_2: "التركيز", val5_2: "كتلة عضلية", lbl5_3: "النوع", val5_3: "تضخيم نظيف", btn5: "↓ تحميل الخطة"
     }
@@ -988,34 +1022,56 @@ const translations = {
 
 let currentLang = 'en';
 
-// دالة حساب السعرات التفاعلية الذكية
-function calculateCalories() {
+// الدالة الذكية لحساب السعرات وتوزيع الـ Macros
+function calculateMacros() {
     const weight = parseFloat(document.getElementById('weight').value);
     const height = parseFloat(document.getElementById('height').value);
     const age = parseFloat(document.getElementById('age').value);
     const activity = parseFloat(document.getElementById('activity').value);
+    const goal = document.getElementById('goal').value;
 
     if (!weight || !height || !age) {
         alert(translations[currentLang].alertField);
         return;
     }
 
-    // معادلة ميفلين سانت جيور
+    // حساب معدل الأيض الأساسي (Mifflin-St Jeor)
     const bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
-    const maintenanceCalories = Math.round(bmr * activity);
-
-    document.getElementById('caloriesValue').textContent = maintenanceCalories;
+    let tdee = Math.round(bmr * activity); // سعرات المحافظة
     
-    if (weight < 70) {
-        document.getElementById('recommendationText').textContent = translations[currentLang].recBulk;
-    } else {
+    let targetCalories = tdee;
+    let proteinGrams = Math.round(weight * 2.2); // 2.2 جرام لكل كيلو جرام
+    let fatsGrams = Math.round(weight * 0.9);    // 0.9 جرام دهون صحية لكل كيلو جرام
+
+    if (goal === 'cut') {
+        targetCalories = tdee - 500; // عجز للتنشيف
         document.getElementById('recommendationText').textContent = translations[currentLang].recCut;
+    } else if (goal === 'bulk') {
+        targetCalories = tdee + 400; // فائض للتضخيم
+        proteinGrams = Math.round(weight * 2.0); 
+        fatsGrams = Math.round(weight * 1.0);
+        document.getElementById('recommendationText').textContent = translations[currentLang].recBulk;
     }
+
+    // حساب كمية الكارب المتبقية من السعرات
+    // الجرام الواحد: البروتين = 4، الكارب = 4، الدهون = 9 سعرات
+    const proteinCalories = proteinGrams * 4;
+    const fatsCalories = fatsGrams * 9;
+    const remainingCalories = targetCalories - (proteinCalories + fatsCalories);
+    let carbsGrams = Math.round(remainingCalories / 4);
+    
+    if (carbsGrams < 50) carbsGrams = 50; // حد أدنى للكارب لسلامة الجسم
+
+    // عرض النتائج على الشاشة بشكل فخم جداً
+    document.getElementById('caloriesValue').textContent = targetCalories;
+    document.getElementById('proteinValue').textContent = proteinGrams + 'g';
+    document.getElementById('carbsValue').textContent = carbsGrams + 'g';
+    document.getElementById('fatsValue').textContent = fatsGrams + 'g';
 
     document.getElementById('calcResult').style.display = 'block';
 }
 
-// تبديل اللغات للموقع بالكامل والمنيو والحاسبة
+// تبديل اللغات للموقع بالكامل والمنيو والحاسبة والماكروز
 langToggle.addEventListener('click', () => {
     currentLang = currentLang === 'en' ? 'ar' : 'en';
     
@@ -1039,26 +1095,33 @@ langToggle.addEventListener('click', () => {
     document.getElementById('menuNutri').textContent = translations[currentLang].menuNutri;
     document.getElementById('menuCalc').textContent = translations[currentLang].menuCalc;
 
-    // عناصر الحاسبة
+    // مدخلات ومسميات لوحة الحاسبة
     document.getElementById('calcTitle').textContent = translations[currentLang].calcTitle;
     document.getElementById('lblWeight').textContent = translations[currentLang].lblWeight;
     document.getElementById('lblHeight').textContent = translations[currentLang].lblHeight;
     document.getElementById('lblAge').textContent = translations[currentLang].lblAge;
+    document.getElementById('lblGoal').textContent = translations[currentLang].lblGoal;
+    document.getElementById('optCut').textContent = translations[currentLang].optCut;
+    document.getElementById('optBulk').textContent = translations[currentLang].optBulk;
     document.getElementById('lblActivity').textContent = translations[currentLang].lblActivity;
     document.getElementById('opt1').textContent = translations[currentLang].opt1;
     document.getElementById('opt2').textContent = translations[currentLang].opt2;
     document.getElementById('opt3').textContent = translations[currentLang].opt3;
     document.getElementById('opt4').textContent = translations[currentLang].opt4;
     document.getElementById('btnCalculate').textContent = translations[currentLang].btnCalculate;
-    document.getElementById('caloriesText').textContent = translations[currentLang].caloriesText;
-    document.getElementById('caloriesUnit').textContent = translations[currentLang].caloriesUnit;
+    
+    // عناوين بطاقات النتائج
+    document.getElementById('lblResCalories').textContent = translations[currentLang].lblResCalories;
+    document.getElementById('lblResProtein').textContent = translations[currentLang].lblResProtein;
+    document.getElementById('lblResCarbs').textContent = translations[currentLang].lblResCarbs;
+    document.getElementById('lblResFats').textContent = translations[currentLang].lblResFats;
 
     if(document.getElementById('calcResult').style.display === 'block') {
-        const w = parseFloat(document.getElementById('weight').value);
-        document.getElementById('recommendationText').textContent = w < 70 ? translations[currentLang].recBulk : translations[currentLang].recCut;
+        const goal = document.getElementById('goal').value;
+        document.getElementById('recommendationText').textContent = goal === 'bulk' ? translations[currentLang].recBulk : translations[currentLang].recCut;
     }
     
-    // تحديث الكروت ديناميكياً
+    // تحديث لغة كروت التمارين والتغذية تلقائياً
     for (let i = 1; i <= 5; i++) {
         document.getElementById(`b${i}`).textContent = translations[currentLang][`b${i}`];
         if(document.getElementById(`t${i}`)) document.getElementById(`t${i}`).textContent = translations[currentLang][`t${i}`];
@@ -1074,7 +1137,7 @@ langToggle.addEventListener('click', () => {
     }
 });
 
-// reveal animation
+// انيميشن ظهور الأقسام عند النزول
 const sections=document.querySelectorAll('.section');
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
@@ -1085,7 +1148,7 @@ entry.target.classList.add('show');
 },{threshold:0.1});
 sections.forEach(s=>observer.observe(s));
 
-// ===== PARTICLES =====
+// جزيئات الخلفية المتحركة (Particles)
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
 
