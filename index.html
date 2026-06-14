@@ -3,162 +3,322 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AYHAM DWAYMEH</title>
+<title>Ayham | Fitness</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Inter',sans-serif;
 }
 
 body{
 background:#050505;
-color:white;
+color:#fff;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:radial-gradient(circle at top right,rgba(255,0,60,.25),transparent 40%);
+pointer-events:none;
+}
+
+.grid{
+position:fixed;
+inset:0;
+background-image:
+linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+background-size:60px 60px;
+z-index:-1;
+}
+
+.container{
+width:min(1150px,90%);
+margin:auto;
 }
 
 header{
-padding:25px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-border-bottom:1px solid #222;
+padding:25px 0;
 }
 
 .logo{
-font-size:30px;
-font-weight:bold;
-color:#ff174f;
+display:flex;
+align-items:center;
+gap:12px;
 }
 
-.insta{
-background:#ff174f;
-color:white;
-padding:12px 20px;
-border-radius:10px;
+.logo-box{
+width:55px;
+height:55px;
+background:#d60035;
+border-radius:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+font-weight:900;
+}
+
+.logo h2{
+font-size:30px;
+}
+
+.logo span{
+color:#999;
+font-size:18px;
+}
+
+.nav{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:12px 22px;
+border-radius:14px;
 text-decoration:none;
+font-weight:700;
+color:white;
+}
+
+.red{
+background:#d60035;
+}
+
+.dark{
+background:#111;
+border:1px solid #333;
 }
 
 .hero{
+min-height:80vh;
+display:flex;
+justify-content:center;
+align-items:center;
 text-align:center;
-padding:100px 20px;
 }
 
 .hero h1{
-font-size:70px;
-margin-bottom:20px;
+font-size:clamp(55px,8vw,105px);
+line-height:1;
+margin-bottom:25px;
+font-weight:900;
 }
 
-.hero span{
-color:#ff174f;
+.hero h1 span{
+color:#ff1f4b;
 }
 
 .hero p{
+max-width:850px;
+margin:auto;
 font-size:22px;
 color:#ccc;
-max-width:700px;
-margin:auto;
+line-height:1.7;
+}
+
+.buttons{
+margin-top:40px;
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.big-btn{
+padding:20px 35px;
+border-radius:18px;
+text-decoration:none;
+font-size:20px;
+font-weight:700;
+color:white;
+}
+
+.join{
+background:#d60035;
+}
+
+.library{
+background:#111;
+border:1px solid #333;
+}
+
+.section-title{
+text-align:center;
+font-size:42px;
+margin-bottom:40px;
 }
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:25px;
-padding:50px 10%;
+padding-bottom:80px;
 }
 
 .card{
 background:#111;
 border:1px solid #222;
-border-radius:20px;
 padding:30px;
+border-radius:20px;
 text-align:center;
-transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-5px);
-border-color:#ff174f;
+border-color:#ff1f4b;
 }
 
 .icon{
-font-size:60px;
-margin-bottom:20px;
+font-size:55px;
+margin-bottom:15px;
 }
 
-.card h2{
-margin-bottom:15px;
-color:#ff174f;
+.card h3{
+margin-bottom:10px;
+color:#ff1f4b;
 }
 
 footer{
-text-align:center;
-padding:40px;
-color:#888;
 border-top:1px solid #222;
-margin-top:50px;
+padding:30px;
+text-align:center;
+color:#888;
+margin-top:40px;
+}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:20px;
+}
+
+.hero h1{
+font-size:55px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+.big-btn{
+width:100%;
+}
+
 }
 </style>
 </head>
+
 <body>
 
-<header>
-<div class="logo">AYHAM DWAYMEH</div>
+<div class="grid"></div>
 
-<a class="insta" href="https://instagram.com/2yhamm" target="_blank">
-Instagram
-</a>
+<div class="container">
+
+<header>
+
+<div class="logo">
+<div class="logo-box">A</div>
+<div>
+<h2>Ayham <span>/ by Ayham</span></h2>
+</div>
+</div>
+
+<div class="nav">
+<a class="btn red" href="https://instagram.com/2yhamm" target="_blank">Instagram</a>
+<a class="btn dark" href="https://wa.me/962799954369" target="_blank">WhatsApp</a>
+</div>
+
 </header>
 
 <section class="hero">
-<h1>Build Muscle With <span>Science</span></h1>
+
+<div>
+
+<h1>
+Build Muscle With
+<br>
+<span>Science</span>
+</h1>
 
 <p>
-Arabic & English Fitness Coaching
-Training Programs • Nutrition Plans • Progress Tracking
+Professional fitness coaching, training programs and nutrition plans.
+Built for serious athletes who want real results.
 </p>
+
+<div class="buttons">
+<a href="#training" class="big-btn join">Training Programs</a>
+<a href="#nutrition" class="big-btn library">Nutrition Plans</a>
+</div>
+
+</div>
+
 </section>
 
-<section class="cards">
+<h2 class="section-title" id="training">Training Programs</h2>
+
+<div class="cards">
 
 <div class="card">
 <div class="icon">🏋️</div>
-<h2>Training Programs</h2>
-<p>
-Workout plans for beginners and advanced athletes.
-</p>
+<h3>Beginner Program</h3>
+<p>Start your fitness journey with a structured plan.</p>
 </div>
+
+<div class="card">
+<div class="icon">💪</div>
+<h3>Muscle Gain</h3>
+<p>Build strength and size with progressive overload.</p>
+</div>
+
+<div class="card">
+<div class="icon">🔥</div>
+<h3>Fat Loss</h3>
+<p>Burn fat while maintaining muscle mass.</p>
+</div>
+
+</div>
+
+<h2 class="section-title" id="nutrition">Nutrition Plans</h2>
+
+<div class="cards">
 
 <div class="card">
 <div class="icon">🥗</div>
-<h2>Nutrition Plans</h2>
-<p>
-Bulking and cutting meal plans with calorie guidance.
-</p>
+<h3>Cutting Diet</h3>
+<p>Calorie-controlled nutrition for fat loss.</p>
 </div>
 
 <div class="card">
-<div class="icon">📈</div>
-<h2>Progress Tracking</h2>
-<p>
-Track your weight, strength and body measurements.
-</p>
+<div class="icon">🍚</div>
+<h3>Bulking Diet</h3>
+<p>High-calorie meal plans for muscle growth.</p>
 </div>
 
 <div class="card">
-<div class="icon">🌍</div>
-<h2>English & Arabic</h2>
-<p>
-Support and coaching available in both languages.
-</p>
+<div class="icon">📊</div>
+<h3>Macro Tracking</h3>
+<p>Track protein, carbs and fats efficiently.</p>
 </div>
 
-</section>
+</div>
 
 <footer>
-© 2026 AYHAM DWAYMEH
+© 2026 Ayham Fitness | Instagram @2yhamm
 </footer>
+
+</div>
 
 </body>
 </html>
