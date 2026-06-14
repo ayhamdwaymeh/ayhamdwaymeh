@@ -10,7 +10,6 @@
 <style>
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 100px; /* يمنع اختفاء العناوين خلف الهيدر عند التنقل */
 }
 
 *{
@@ -42,7 +41,6 @@ left:0;
 width:100%;
 height:100%;
 z-index:-1;
-pointer-events: none;
 }
 
 /* ===== HEADER ===== */
@@ -56,60 +54,94 @@ header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 0;
+padding:25px 0;
 position:sticky;
 top:0;
-backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
-background:rgba(5, 5, 5, 0.6);
+backdrop-filter:blur(10px);
+background:rgba(0,0,0,0.4);
 z-index:10;
-border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .logo{
-font-size:26px;
+font-size:28px;
 font-weight:900;
 color:#ff174f;
-letter-spacing:1.5px;
-text-shadow: 0 0 15px rgba(255, 23, 79, 0.3);
+letter-spacing:2px;
 }
 
+/* التنسيق الجديد للأزرار أعلى اليمين بناءً على image.png */
 nav{
 display:flex;
-gap:24px;
+gap:12px;
 align-items:center;
 }
 
-nav a{
-color:white;
-text-decoration:none;
-opacity:.7;
-font-weight:600;
-transition:.3s ease;
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 10px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: #e01243;
+    font-weight: 700;
+    font-size: 14px;
+    transition: 0.3s;
 }
 
-nav a:hover{
-opacity:1;
-transform:translateY(-1px);
+.lang-btn svg {
+    fill: #666;
+    transition: 0.3s;
 }
 
-.insta{
-padding:10px 20px;
-border-radius:12px;
-background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
-font-weight:800;
-opacity: 1 !important;
-transition: .3s transform ease;
+.lang-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.insta:hover {
+.lang-btn:hover svg {
+    fill: #fff;
+}
+
+.insta-btn {
+    background: #ff174f;
+    color: white;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: 0.3s;
+    text-shadow: none;
+    box-shadow: 0 4px 15px rgba(255,23,79,0.2);
+}
+
+.insta-btn:hover {
+    background: #e01243;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(214, 41, 118, 0.4);
+    box-shadow: 0 5px 20px rgba(255,23,79,0.4);
+}
+
+.menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 14px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 /* ===== HERO ===== */
 .hero{
-min-height:80vh;
+min-height:75vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -117,50 +149,46 @@ text-align:center;
 }
 
 .hero h1{
-font-size:clamp(42px,7.5vw,90px);
+font-size:clamp(40px,7vw,95px);
 font-weight:900;
-letter-spacing: -1.5px;
-line-height: 1.1;
+letter-spacing: -1px;
 }
 
 .hero span{
 color:#ff174f;
-text-shadow:0 0 30px rgba(255, 23, 79, 0.5);
+text-shadow:0 0 25px rgba(255, 23, 79, 0.6);
 }
 
 .hero p{
 color:#bbb;
-max-width:650px;
-margin:24px auto;
+max-width:700px;
+margin:20px auto;
 font-size: 18px;
-line-height: 1.6;
 }
 
 .btn{
 display:inline-block;
-margin-top:15px;
-padding:16px 45px;
+margin-top:25px;
+padding:16px 40px;
 background:#ff174f;
 color:white;
 border-radius:14px;
 text-decoration:none;
 font-weight:800;
-transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-box-shadow:0 4px 15px rgba(255,23,79,.2);
+transition: 0.3s;
 }
-
 .btn:hover {
     background: #e01243;
-    transform: translateY(-3px);
-    box-shadow:0 8px 25px rgba(255,23,79,.5);
+    transform: translateY(-2px);
+    box-shadow:0 5px 20px rgba(255,23,79,.4);
 }
 
 /* ===== SECTIONS ===== */
 .section{
-padding:90px 0 40px 0;
+padding:70px 0;
 opacity:0;
-transform:translateY(40px);
-filter:blur(4px);
+transform:translateY(50px);
+filter:blur(5px);
 transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -172,47 +200,44 @@ filter:blur(0);
 
 .title{
 text-align:left;
-font-size:34px;
-margin-bottom:45px;
+font-size:32px;
+margin-bottom:40px;
 font-weight:900;
 letter-spacing: -0.5px;
 border-left: 4px solid #ff174f;
-padding-left: 18px;
+padding-left: 15px;
 }
 
-/* ===== CARDS GRID SYSTEM (UPDATED) ===== */
+/* ===== CARDS (الترتيب العمودي الأصلي تبعك) ===== */
 .cards{
-display:grid;
-grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-gap:30px;
+display:flex;
+flex-direction: column;
+gap:25px;
 }
 
 .card{
-background: rgba(15, 15, 15, 0.55);
+background: rgba(15, 15, 15, 0.65);
 backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
-border: 1px solid rgba(255,255,255,0.04);
+border: 1px solid rgba(255,255,255,0.05);
 padding: 35px;
-border-radius: 22px;
+border-radius: 20px;
 transition: .4s cubic-bezier(0.16, 1, 0.3, 1);
 display: flex;
 flex-direction: column;
-gap: 24px;
+gap: 20px;
 position: relative;
 }
 
 .card:hover{
-border-color: rgba(255, 23, 79, 0.35);
-box-shadow:0 20px 40px rgba(0, 0, 0, 0.6);
-background: rgba(20, 20, 20, 0.75);
-transform: translateY(-4px);
+border-color: rgba(255, 23, 79, 0.3);
+box-shadow:0 15px 50px rgba(0, 0, 0, 0.5);
+background: rgba(20, 20, 20, 0.8);
 }
 
 .card-badge {
     align-self: flex-start;
-    padding: 6px 14px;
-    border: 1px solid rgba(255, 23, 79, 0.3);
-    background: rgba(255, 23, 79, 0.05);
+    padding: 5px 14px;
+    border: 1px solid rgba(255, 23, 79, 0.4);
     border-radius: 20px;
     font-size: 11px;
     font-weight: 700;
@@ -222,28 +247,26 @@ transform: translateY(-4px);
 }
 
 .card-info h3{
-font-size: 26px;
+font-size: 28px;
 font-weight: 800;
 color: #ffffff;
-margin-bottom: 8px;
+margin-bottom: 6px;
 }
 
 .card-info p{
-color:#999;
+color:#888;
 font-size: 15px;
 font-weight: 400;
-line-height: 1.4;
 }
 
-/* Grid specs */
+/* Grid specs from image_2.png */
 .card-specs {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 22px 0;
+    padding: 20px 0;
     text-align: center;
-    margin-top: auto; /* يدفع الخصائص والزر لأسفل الكارت ليصبح التصميم متناسق */
 }
 
 .spec-item {
@@ -259,14 +282,14 @@ line-height: 1.4;
 .spec-label {
     font-size: 11px;
     text-transform: uppercase;
-    color: #666;
+    color: #555;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
 .spec-value {
     font-size: 16px;
-    color: #eee;
+    color: #ddd;
     font-weight: 600;
 }
 
@@ -275,17 +298,17 @@ line-height: 1.4;
 display:flex;
 align-items: center;
 justify-content: center;
-gap: 10px;
+gap: 8px;
 width: 100%;
-padding: 15px;
+padding: 14px;
 background: rgba(255, 255, 255, 0.03);
-border: 1px solid rgba(255, 255, 255, 0.07);
+border: 1px solid rgba(255, 255, 255, 0.08);
 color: #eee;
-border-radius: 14px;
+border-radius: 12px;
 text-decoration: none;
 font-weight: 600;
 font-size: 15px;
-transition: .3s cubic-bezier(0.16, 1, 0.3, 1);
+transition: .3s;
 }
 
 .download:hover{
@@ -293,24 +316,22 @@ background: #ffffff;
 color: #050505;
 border-color: #ffffff;
 font-weight: 700;
-box-shadow: 0 10px 20px rgba(255,255,255,0.1);
 }
 
 /* FOOTER */
 footer{
 text-align:center;
-padding:50px 20px;
-color:#444;
-border-top:1px solid rgba(255,255,255,0.02);
-margin-top:100px;
+padding:40px;
+color:#555;
+border-top:1px solid #111;
+margin-top:80px;
 font-size: 14px;
-letter-spacing: 0.5px;
 }
 
-/* Responsive adjustment */
+/* Responsive adjustment for specs on small mobiles */
 @media (max-width: 480px) {
     .card {
-        padding: 30px 20px;
+        padding: 25px 20px;
     }
     .card-specs {
         grid-template-columns: 1fr;
@@ -318,15 +339,10 @@ letter-spacing: 0.5px;
         text-align: left;
         padding: 15px 5px;
     }
-    .spec-item {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
     .spec-item:not(:last-child) {
         border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 10px;
     }
 }
 </style>
@@ -342,10 +358,24 @@ letter-spacing: 0.5px;
 <header>
 <div class="logo">AYHAM ELITE</div>
 
+<!-- الأزرار الجديدة المضافة هنا بالظبط -->
 <nav>
-<a href="#programs">Programs</a>
-<a href="#nutrition">Nutrition</a>
-<a class="insta" href="https://instagram.com/2yhamm" target="_blank">Instagram</a>
+    <a href="#" class="lang-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+        <span>AR</span>
+    </a>
+
+    <a class="insta-btn" href="https://instagram.com/2yhamm" target="_blank">Instagram</a>
+
+    <div class="menu-btn">
+        <svg width="20" height="14" viewBox="0 0 20 14">
+            <line x1="0" y1="1.5" x2="20" y2="1.5" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="0" y1="7" x2="20" y2="7" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="0" y1="12.5" x2="20" y2="12.5" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+    </div>
 </nav>
 </header>
 
@@ -367,7 +397,7 @@ letter-spacing: 0.5px;
         <div class="card-badge">Beginner</div>
         <div class="card-info">
             <h3>Beginner</h3>
-            <p>Start strong with fundamental gym movements and build a solid foundation.</p>
+            <p>Start strong fundamentals.</p>
         </div>
         <div class="card-specs">
             <div class="spec-item">
@@ -384,7 +414,7 @@ letter-spacing: 0.5px;
             </div>
         </div>
         <a class="download" href="files/beginner.pdf" download>
-            <span>↓</span> Download Program
+            <span>↓</span> Download
         </a>
     </div>
 
@@ -393,7 +423,7 @@ letter-spacing: 0.5px;
         <div class="card-badge">Hypertrophy</div>
         <div class="card-info">
             <h3>Hypertrophy</h3>
-            <p>Advanced muscle growth system designed to optimize volume and recovery.</p>
+            <p>Muscle growth system.</p>
         </div>
         <div class="card-specs">
             <div class="spec-item">
@@ -406,11 +436,11 @@ letter-spacing: 0.5px;
             </div>
             <div class="spec-item">
                 <span class="spec-label">Type</span>
-                <span class="spec-value">PPL</span>
+                <span class="spec-value">Push Pull Legs</span>
             </div>
         </div>
         <a class="download" href="files/bulking.pdf" download>
-            <span>↓</span> Download Program
+            <span>↓</span> Download
         </a>
     </div>
 
@@ -419,7 +449,7 @@ letter-spacing: 0.5px;
         <div class="card-badge">Fat Burn</div>
         <div class="card-info">
             <h3>Fat Burn</h3>
-            <p>High intensity routine to shred body fat while maintaining lean muscle mass.</p>
+            <p>Cut fat & keep muscle.</p>
         </div>
         <div class="card-specs">
             <div class="spec-item">
@@ -436,7 +466,7 @@ letter-spacing: 0.5px;
             </div>
         </div>
         <a class="download" href="files/fatloss.pdf" download>
-            <span>↓</span> Download Program
+            <span>↓</span> Download
         </a>
     </div>
 </div>
@@ -452,7 +482,7 @@ letter-spacing: 0.5px;
         <div class="card-badge">Fat Loss</div>
         <div class="card-info">
             <h3>Cutting Plan</h3>
-            <p>Caloric deficit strategy focused on lean body metrics and sharp definition.</p>
+            <p>Lean body, sharp definitions.</p>
         </div>
         <div class="card-specs">
             <div class="spec-item">
@@ -478,7 +508,7 @@ letter-spacing: 0.5px;
         <div class="card-badge">Mass Gain</div>
         <div class="card-info">
             <h3>Bulking Plan</h3>
-            <p>Structured surplus protocol for maximum muscle mass with minimal fat gain.</p>
+            <p>Clean mass gain with minimal fat.</p>
         </div>
         <div class="card-specs">
             <div class="spec-item">
@@ -491,7 +521,7 @@ letter-spacing: 0.5px;
             </div>
             <div class="spec-item">
                 <span class="spec-label">Type</span>
-                <span class="spec-value">Clean Bulk</span>
+                <span class="spec-value">Clean Bulking</span>
             </div>
         </div>
         <a class="download" href="files/bulking.pdf" download>
@@ -502,7 +532,7 @@ letter-spacing: 0.5px;
 </section>
 
 <footer>
-© 2026 Ayham Elite Fitness. All Rights Reserved.
+© 2026 Ayham Elite Fitness
 </footer>
 
 </div>
@@ -522,33 +552,28 @@ entry.target.classList.add('show');
 sections.forEach(s=>observer.observe(s));
 
 
-// ===== PARTICLES WITH SEAMLESS RESIZE FIX =====
+// ===== PARTICLES WITH RESIZE FIX =====
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
-
-let particles=[];
 
 function resizeCanvas() {
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight;
-    initParticles(); // إعادة توزيع الجزيئات لتناسب الأبعاد الجديدة دون مشاكل
 }
-
-function initParticles() {
-    particles = [];
-    for(let i=0;i<60;i++){
-        particles.push({
-            x:Math.random()*canvas.width,
-            y:Math.random()*canvas.height,
-            r:Math.random()*1.8,
-            dx:(Math.random()-0.5)*0.6,
-            dy:(Math.random()-0.5)*0.6
-        });
-    }
-}
-
+resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
-resizeCanvas(); // التشغيل الأول عند تحميل الصفحة
+
+let particles=[];
+
+for(let i=0;i<60;i++){
+particles.push({
+x:Math.random()*window.innerWidth,
+y:Math.random()*window.innerHeight,
+r:Math.random()*1.8,
+dx:(Math.random()-0.5)*0.6,
+dy:(Math.random()-0.5)*0.6
+});
+}
 
 function animate(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
