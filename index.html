@@ -819,105 +819,26 @@ font-size: 14px;
 </head>
 
 <body>
+<nav id="athlead-nav" style="width: 100%; background-color: #030303; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: relative; z-index: 9999; box-sizing: border-box;">
+    <!-- Logo -->
+    <a href="#" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <div style="width: 38px; height: 38px; background-color: #ff1e46; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-weight: 900; font-size: 1.4rem;">A</div>
+        <div style="color: #ffffff; font-size: 1.25rem; font-weight: 700;">Athlead</div>
+    </a>
 
-    <!-- ========================================== -->
-    <!-- الـ Navbar المطابق لتصميم موقعك -->
-    <!-- ========================================== -->
-    <nav class="athlead-navbar-container" id="athlead-nav">
-        <!-- اللوجو والهوية البراندية -->
-        <a href="#" class="athlead-brand-wrapper">
-            <div class="athlead-logo-box">A</div>
-            <div class="athlead-brand-text">
-                Athlead<span class="athlead-brand-sub">/ by Ayham</span>
-            </div>
-        </a>
+    <!-- Menu -->
+    <div style="background: rgba(255,255,255,0.05); padding: 8px 20px; border-radius: 30px; display: flex; gap: 20px;">
+        <a href="#" style="color: white; text-decoration: none; font-size: 0.9rem;">Programs</a>
+        <a href="#" style="color: white; text-decoration: none; font-size: 0.9rem;">Exercises</a>
+        <a href="#" style="color: white; text-decoration: none; font-size: 0.9rem;">Nutrition</a>
+    </div>
 
-        <!-- الأزرار والقائمة الرئيسية الوسطى -->
-        <div class="athlead-nav-menu">
-            <a href="#" class="athlead-nav-link" id="nav-item-1">Programs</a>
-            <a href="#" class="athlead-nav-link" id="nav-item-2">Exercises</a>
-            <a href="#" class="athlead-nav-link active" id="nav-item-3">Nutrition</a>
-            <a href="#" class="athlead-nav-link" id="nav-item-4">Macro Card</a>
-        </div>
+    <!-- Actions -->
+    <div style="display: flex; gap: 15px;">
+        <a href="https://instagram.com" style="background: #ff1e46; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 700;">Instagram</a>
+    </div>
+</nav>
 
-        <!-- الأزرار الجانبية اللغات والانستقرام -->
-        <div class="athlead-actions-wrapper">
-            <button class="athlead-lang-btn" id="nav-lang-toggle" onclick="toggleNavbarLanguage()">
-                <span class="athlead-lang-icon">🌐</span> <span id="lang-text-btn">AR</span>
-            </button>
-            <a href="https://instagram.com/حسابك" target="_blank" class="athlead-instagram-btn" id="nav-instagram-btn">Instagram</a>
-            <button class="menu-btn" aria-label="Toggle Menu">☰</button>
-        </div>
-    </nav>
-
-    <script>
-        const navTranslations = {
-            en: {
-                sub: "/ by Ayham",
-                item1: "Programs",
-                item2: "Exercises",
-                item3: "Nutrition",
-                item4: "Macro Card",
-                langBtn: "AR",
-                insta: "Instagram"
-            },
-            ar: {
-                sub: "/ بواسطة أيهم",
-                item1: "البرامج",
-                item2: "التمارين",
-                item3: "التغذية",
-                item4: "بطاقة الماكروز",
-                langBtn: "EN",
-                insta: "انستقرام"
-            }
-        };
-
-        let currentNavLang = 'en';
-
-        function applyNavLanguage(lang) {
-            currentNavLang = lang;
-            const data = navTranslations[lang];
-            const navElement = document.getElementById('athlead-nav');
-
-            if (lang === 'ar') {
-                navElement.classList.add('athlead-rtl');
-            } else {
-                navElement.classList.remove('athlead-rtl');
-            }
-
-            document.getElementById('nav-item-1').innerText = data.item1;
-            document.getElementById('nav-item-2').innerText = data.item2;
-            document.getElementById('nav-item-3').innerText = data.item3;
-            document.getElementById('nav-item-4').innerText = data.item4;
-            document.getElementById('lang-text-btn').innerText = data.langBtn;
-            document.getElementById('nav-instagram-btn').innerText = data.insta;
-            
-            const brandTextContainer = document.querySelector('.athlead-brand-text');
-            brandTextContainer.innerHTML = `Athlead<span class="athlead-brand-sub">${data.sub}</span>`;
-        }
-
-        function toggleNavbarLanguage() {
-            if (currentNavLang === 'en') {
-                applyNavLanguage('ar');
-            } else {
-                applyNavLanguage('en');
-            }
-        }
-
-        function autoDetectNavLanguage() {
-            const htmlTag = document.documentElement;
-            const isRtl = htmlTag.getAttribute('dir') === 'rtl' || window.getComputedStyle(htmlTag).direction === 'rtl';
-            if (isRtl) {
-                applyNavLanguage('ar');
-            } else {
-                applyNavLanguage('en');
-            }
-        }
-
-        autoDetectNavLanguage();
-    </script>
-    <!-- ========================================== -->
-    
 <div class="bg"></div>
 <canvas id="particles"></canvas>
 
