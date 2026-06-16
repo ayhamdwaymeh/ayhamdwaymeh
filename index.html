@@ -869,63 +869,222 @@ font-size: 14px;
 </div>
 </section>
 
-    <!-- ======================================================= -->
-<!-- بداية قسم البرامج التدريبية المضاف حديثاً (تصميم واجهة كاملة) -->
+<!-- ======================================================= -->
+<!-- بداية قسم البرامج التدريبية المطور - تصميم عريض متناسق -->
 <!-- ======================================================= -->
 <style>
-    .main-header-new { text-align: center; margin-top: 60px; margin-bottom: 40px; width: 100%; font-family: sans-serif; }
-    .badge-top-new { border: 1px solid #c92a2a; color: #ff6b6b; font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; letter-spacing: 2px; font-weight: bold; display: inline-block; }
-    .main-title-new { font-size: 3rem; font-weight: 800; margin: 15px 0; color: #ffffff; }
-    .main-subtitle-new { color: #888888; font-size: 1.1rem; line-height: 1.6; }
-    .how-it-works-container-new { width: 100%; max-width: 1100px; margin: 0 auto 60px auto; font-family: sans-serif; }
-    .how-it-works-card-new { background-color: #0b0b0c; border: 1px solid #1c1c1e; border-radius: 24px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: left; direction: ltr; }
-    .badge-red-new { color: #ff6b6b; font-size: 0.75rem; font-weight: bold; letter-spacing: 1.5px; border: 1px solid rgba(239, 68, 68, 0.2); background-color: rgba(239, 68, 68, 0.05); padding: 6px 14px; border-radius: 20px; display: inline-block; margin-bottom: 25px; }
-    .section-heading-new { font-size: 1.7rem; font-weight: 700; line-height: 1.4; margin-bottom: 15px; color: #ffffff; }
-    .section-description-new { color: #888888; font-size: 1rem; line-height: 1.6; margin-bottom: 35px; }
-    .steps-grid-new { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .step-item-new { background-color: #0e0e10; border: 1px solid #1c1c1e; border-radius: 16px; padding: 25px; display: flex; flex-direction: column; align-items: flex-start; }
-    .step-number-new { background-color: #e03131; color: #ffffff; font-size: 0.8rem; font-weight: bold; padding: 4px 8px; border-radius: 6px; margin-bottom: 15px; }
-    .step-item-new h3 { font-size: 1.1rem; font-weight: 700; margin: 0 0 10px 0; color: #ffffff; }
-    .step-item-new p { color: #777777; font-size: 0.9rem; line-height: 1.5; margin: 0; }
+    .fitlead-programs-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 20px;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #050505; /* خلفية سوداء داكنة متناسقة */
+    }
+
+    /* تنسيق قسم الترويسة العلوي ليكون متناسقاً وعريضاً */
+    .fitlead-main-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        width: 100%;
+        margin-bottom: 40px;
+        border-bottom: 1px solid #111112;
+        padding-bottom: 30px;
+    }
+
+    .fitlead-header-left {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        flex: 1;
+    }
+
+    .fitlead-badge-top {
+        border: 1px solid #c92a2a;
+        color: #ff6b6b;
+        font-size: 0.7rem;
+        padding: 6px 14px;
+        border-radius: 20px;
+        letter-spacing: 2px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .fitlead-main-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0;
+        color: #ffffff;
+        letter-spacing: -1px;
+        line-height: 1.1;
+    }
+
+    .fitlead-main-subtitle {
+        color: #888888;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        max-width: 500px;
+        margin: 0;
+        flex: 1;
+        text-align: right;
+    }
+
+    /* الصندوق الكبير الرئيسي (Card) */
+    .fitlead-how-it-works-card {
+        background-color: #0b0b0c;
+        border: 1px solid #1c1c1e;
+        border-radius: 24px;
+        padding: 45px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        text-align: left;
+        direction: ltr;
+    }
+
+    .fitlead-badge-red {
+        color: #ff6b6b;
+        font-size: 0.75rem;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        background-color: rgba(239, 68, 68, 0.05);
+        padding: 6px 14px;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 25px;
+    }
+
+    .fitlead-section-heading {
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 1.4;
+        margin: 0 0 15px 0;
+        color: #ffffff;
+    }
+
+    .fitlead-section-description {
+        color: #888888;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 0 0 40px 0;
+    }
+
+    /* شبكة الكروت الأربعة الفردية بالأسفل */
+    .fitlead-steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .fitlead-step-item {
+        background-color: #0e0e10;
+        border: 1px solid #1c1c1e;
+        border-radius: 16px;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .fitlead-step-number {
+        background-color: #e03131;
+        color: #ffffff;
+        font-size: 0.8rem;
+        font-weight: bold;
+        padding: 4px 8px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+    }
+
+    .fitlead-step-item h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 0 0 10px 0;
+        color: #ffffff;
+    }
+
+    .fitlead-step-item p {
+        color: #777777;
+        font-size: 0.88rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* التجاوب مع الشاشات الصغيرة والجوال ليتحول إلى طولي بشكل مرتب */
+    @media (max-width: 768px) {
+        .fitlead-main-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .fitlead-main-subtitle {
+            text-align: left;
+        }
+        .fitlead-main-title {
+            font-size: 2.2rem;
+        }
+        .fitlead-how-it-works-card {
+            padding: 25px;
+        }
+    }
 </style>
 
-<header class="main-header-new">
-    <span class="badge-top-new">PROGRAMMING</span>
-    <h1 class="main-title-new">Training Programs</h1>
-    <p class="main-subtitle-new">Four evidence-based splits. Each engineered around frequency, recovery, and stimulus distribution.</p>
-</header>
+<div class="fitlead-programs-container">
+    <!-- الجزء العلوي العريض المتناسق -->
+    <header class="fitlead-main-header">
+        <div class="fitlead-header-left">
+            <span class="fitlead-badge-top">PROGRAMMING</span>
+            <h1 class="fitlead-main-title">Training<br>Programs</h1>
+        </div>
+        <p class="fitlead-main-subtitle">
+            Four evidence-based splits. Each engineered around frequency, recovery, and stimulus distribution.
+        </p>
+    </header>
 
-<section class="how-it-works-container-new">
-    <div class="how-it-works-card-new">
-        <span class="badge-red-new">HOW IT WORKS</span>
-        <h2 class="section-heading-new">The spreadsheets give you a structure — you fill it with exercises that fit you.</h2>
-        <p class="section-description-new">Every Excel file lists Movement Functions instead of exercise names. This forces you to think in mechanics — not in 'bench press' but in 'Horizontal Adduction'. You then choose the actual exercise from the Explorer below, based on your equipment and your weak points.</p>
-        <div class="steps-grid-new">
-            <div class="step-item-new">
-                <span class="step-number-new">01</span>
+    <!-- المربع الكبير الاحترافي -->
+    <section class="fitlead-how-it-works-card">
+        <span class="fitlead-badge-red">HOW IT WORKS</span>
+        
+        <h2 class="fitlead-section-heading">
+            The spreadsheets give you a structure — you fill it with exercises that fit you.
+        </h2>
+        
+        <p class="fitlead-section-description">
+            Every Excel file lists Movement Functions instead of exercise names. This forces you to think in mechanics — not in 'bench press' but in 'Horizontal Adduction'. You then choose the actual exercise from the Explorer below, based on your equipment and your weak points.
+        </p>
+
+        <div class="fitlead-steps-grid">
+            <!-- كرت 1 -->
+            <div class="fitlead-step-item">
+                <span class="fitlead-step-number">01</span>
                 <h3>Pick a Program</h3>
                 <p>Choose one of the four splits below based on your training experience and weekly availability.</p>
             </div>
-            <div class="step-item-new">
-                <span class="step-number-new">02</span>
+            <!-- كرت 2 -->
+            <div class="fitlead-step-item">
+                <span class="fitlead-step-number">02</span>
                 <h3>Download the Excel</h3>
                 <p>The sheet shows you the framework: how many sessions per week, which functions to train each day, sets, reps, and rest.</p>
             </div>
-            <div class="step-item-new">
-                <span class="step-number-new">03</span>
+            <!-- كرت 3 -->
+            <div class="fitlead-step-item">
+                <span class="fitlead-step-number">03</span>
                 <h3>Match Functions to Exercises</h3>
                 <p>Use the Movement Function Explorer below. For each function in your sheet, pick a top-3 exercise that matches your gym setup.</p>
             </div>
-            <div class="step-item-new">
-                <span class="step-number-new">04</span>
+            <!-- كرت 4 -->
+            <div class="fitlead-step-item">
+                <span class="fitlead-step-number">04</span>
                 <h3>Order by Weak Points</h3>
                 <p>Place exercises that target your weakest muscles first — when energy and focus are highest. Strong areas come later in the session.</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 <!-- ======================================================= -->
-<!-- نهاية القسم المضاف حديثاً -->
+<!-- نهاية قسم البرامج التدريبية المطور -->
 <!-- ======================================================= -->
     
 <!-- TRAINING PROGRAMS SECTION -->
