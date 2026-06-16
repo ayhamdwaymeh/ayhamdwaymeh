@@ -1191,6 +1191,82 @@ font-size: 14px;
 </div>
 </section>
 
+    <style>
+    /* الحاوية الرئيسية المعزولة لضمان الثبات التام */
+    .fitlead-calories-wrapper {
+        width: 100%;
+        max-width: 1200px;
+        margin: 140px auto 40px auto; /* مسافة علوية ممتازة تمنع التداخل مع الهيدر */
+        padding: 0 20px;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: transparent !important; /* شفاف تماماً لتظهر نقاط الخلفية خلفه */
+        position: relative;
+        display: block;
+        clear: both;
+    }
+
+    /* الترويسة الموسطة بالكامل طبق الأصل من ستايلك المفضل */
+    .fitlead-calories-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* توسيط أفقي لكل العناصر */
+        text-align: center;  /* توسيط النصوص */
+        width: 100%;
+        background: transparent !important;
+    }
+
+    /* الشارة العلوية المحددة بالأحمر */
+    .fitlead-badge-calories {
+        border: 1px solid #c92a2a;
+        color: #ff6b6b;
+        font-size: 0.75rem;
+        padding: 6px 16px;
+        border-radius: 20px;
+        letter-spacing: 2px;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 25px;
+        background: rgba(199, 42, 42, 0.05);
+        text-transform: uppercase;
+    }
+
+    /* العنوان الكبير الموسط الثابت */
+    .fitlead-title-calories {
+        font-size: 3.8rem;
+        font-weight: 800;
+        margin: 0 0 20px 0;
+        color: #ffffff;
+        letter-spacing: -1px;
+        line-height: 1.2;
+    }
+
+    /* النص الفرعي المفرود عرضياً بطريقة مريحة للعين */
+    .fitlead-subtitle-calories {
+        color: #888888;
+        font-size: 1.2rem;
+        line-height: 1.6;
+        max-width: 750px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+        .fitlead-calories-wrapper { margin-top: 160px; }
+        .fitlead-title-calories { font-size: 2.6rem; }
+        .fitlead-subtitle-calories { font-size: 1.05rem; }
+    }
+</style>
+
+<div class="fitlead-calories-wrapper">
+    <div class="fitlead-calories-header">
+        <span class="fitlead-badge-calories">Nutrition</span>
+        <h1 class="fitlead-title-calories">Maintenance Calories</h1>
+        <p class="fitlead-subtitle-calories">
+            Calculate your baseline energy requirements. The precise starting point engineered around your physical activity and body composition.
+        </p>
+    </div>
+</div>
+    
 <!-- ===== حاسبة السعرات والماكروز الاحترافية الذكية والمقسمة ===== -->
 <section class="section" id="calculator">
 <h2 class="title" id="calcTitle">Calorie & Macros Calculator</h2>
