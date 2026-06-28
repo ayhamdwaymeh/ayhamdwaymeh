@@ -1151,6 +1151,40 @@ font-size: 14px;
 </div>
 </section>
 
+    <section style="margin: 20px 0; padding: 20px; background: rgba(25, 25, 25, 0.7); border: 1px solid #333; border-radius: 16px;">
+    <div style="border-left: 4px solid #ff2d55; padding-left: 15px; margin-bottom: 20px;">
+        <h2 style="color: #fff; margin: 0; font-family: sans-serif;">Workout History</h2>
+    </div>
+    
+    <div id="weeks-container" style="color: #ccc;"></div>
+</section>
+
+<script>
+function renderWorkouts() {
+    const logs = JSON.parse(localStorage.getItem('fitlead_logs')) || [];
+    const container = document.getElementById('weeks-container');
+    container.innerHTML = "";
+
+    const grouped = logs.reduce((acc, log) => {
+        let week = "WEEK " + Math.ceil(new Date(log.date).getDate() / 7);
+        if(!acc[week]) acc[week] = [];
+        acc[week].push(log);
+        return acc;
+    }, {});
+
+    Object.entries(grouped).forEach(([week, items]) => {
+        container.innerHTML += `
+            <div style="margin-bottom: 15px;">
+                <div style="color: #ff2d55; font-weight: bold; margin-bottom: 5px;">${week}</div>
+                ${items.map(i => `<div style="padding: 5px 0; border-bottom: 1px solid #333;">${i.exercise} - ${i.weight}kg</div>`).join('')}
+            </div>
+        `;
+    });
+}
+window.onload = renderWorkouts;
+</script>
+
+
 <!-- NUTRITION SECTION -->
 <section class="section" id="nutrition">
 <h2 class="title" id="secTitle2">Nutrition Plans</h2>
