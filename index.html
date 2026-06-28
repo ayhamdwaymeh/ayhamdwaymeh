@@ -1152,45 +1152,52 @@ font-size: 14px;
 </section>
 
 
-    <!-- الصندوق الشفاف الرئيسي (الخلفية) -->
-<section style="margin: 20px 0; padding: 20px; background: rgba(25, 25, 25, 0.7); border: 1px solid #333; border-radius: 16px;">
+<!-- Fitlead Workout History -->
+<section id="workout-history-section" style="margin: 20px 0; padding: 20px; background: #0a0a0a; border: 1px solid #333; border-radius: 16px; color: #fff; font-family: sans-serif;">
     
-    <!-- العنوان بالستايل المطابق لموقعك -->
+    <!-- العنوان -->
     <div style="border-left: 4px solid #ff2d55; padding-left: 15px; margin-bottom: 20px;">
-        <h2 style="color: #fff; margin: 0; font-family: sans-serif; font-size: 24px;">Workout History</h2>
+        <h2 style="margin: 0; font-size: 24px;">WORKOUT HISTORY</h2>
     </div>
 
-    <!-- نموذج إدخال التمارين -->
-    <div style="margin-bottom: 20px;">
-        <input type="text" id="exName" placeholder="Exercise Name" style="padding: 10px; border-radius: 8px; border: none; width: 100%; margin-bottom: 10px; background: #1a1a1a; color: #fff;">
-        <input type="number" id="exWeight" placeholder="Weight (kg)" style="padding: 10px; border-radius: 8px; border: none; width: 100%; margin-bottom: 10px; background: #1a1a1a; color: #fff;">
-        <button onclick="addLog()" style="background: #ff2d55; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold;">Save Workout</button>
+    <!-- المدخلات -->
+    <div style="background: #1a1a1a; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <input type="text" id="exName" placeholder="Exercise Name" style="width:100%; padding:8px; margin-bottom:5px; background:#222; border:1px solid #444; color:#fff; border-radius:4px;">
+        <div style="display: flex; gap: 5px;">
+            <input type="text" id="exLoad" placeholder="Load" style="width:50%; padding:8px; background:#222; border:1px solid #444; color:#fff; border-radius:4px;">
+            <input type="text" id="exReps" placeholder="Reps" style="width:50%; padding:8px; background:#222; border:1px solid #444; color:#fff; border-radius:4px;">
+        </div>
+        <button onclick="addLog()" style="width:100%; margin-top:10px; padding:10px; background:#ff2d55; border:none; color:white; font-weight:bold; cursor:pointer; border-radius:4px;">ADD EXERCISE</button>
     </div>
 
-    <!-- منطقة عرض سجل التمارين -->
-    <div id="weeks-container" style="color: #ccc; font-family: sans-serif;"></div>
+    <!-- قائمة الأسابيع -->
+    <div id="weeks-container"></div>
 </section>
 
 <script>
 function addLog() {
     const name = document.getElementById('exName').value;
-    const weight = document.getElementById('exWeight').value;
-    if(!name || !weight) return alert("الرجاء تعبئة الحقول");
-    
+    const load = document.getElementById('exLoad').value;
+    const reps = document.getElementById('exReps').value;
+    if(!name) return alert("Please enter exercise name");
+
+    const log = { name, load: load || "-", reps: reps || "-", date: new Date().toISOString() };
     let logs = JSON.parse(localStorage.getItem('fitlead_logs')) || [];
-    logs.push({exercise: name, weight: weight, date: new Date().toISOString()});
+    logs.push(log);
     localStorage.setItem('fitlead_logs', JSON.stringify(logs));
     
     document.getElementById('exName').value = "";
-    document.getElementById('exWeight').value = "";
-    renderWorkouts();
+    document.getElementById('exLoad').value = "";
+    document.getElementById('exReps').value = "";
+    render();
 }
 
-function renderWorkouts() {
+function render() {
     const logs = JSON.parse(localStorage.getItem('fitlead_logs')) || [];
     const container = document.getElementById('weeks-container');
     container.innerHTML = "";
     
+    // تجميع حسب الأسبوع (يتم الحساب بناءً على تاريخ اليوم)
     const grouped = logs.reduce((acc, log) => {
         let week = "WEEK " + Math.ceil(new Date(log.date).getDate() / 7);
         if(!acc[week]) acc[week] = [];
@@ -1200,14 +1207,17 @@ function renderWorkouts() {
 
     Object.entries(grouped).forEach(([week, items]) => {
         container.innerHTML += `
-            <div style="margin-bottom: 15px; border-top: 1px solid #333; padding-top: 10px;">
-                <div style="color: #ff2d55; font-weight: bold; margin-bottom: 5px;">${week}</div>
-                ${items.map(i => `<div style="padding: 3px 0;">${i.exercise} - ${i.weight}kg</div>`).join('')}
+            <div style="margin-bottom:15px; border:1px solid #333; border-radius:8px; overflow:hidden;">
+                <div style="background:#162534; padding:10px; color:#fff; font-weight:bold; border-bottom:1px solid #333;">${week}</div>
+                ${items.map(l => `
+                    <div style="padding:10px; border-bottom:1px solid #222; display:flex; justify-content:space-between; font-size:14px;">
+                        <span>${l.name}</span> <span style="color:#aaa;">${l.load} | ${l.reps}</span>
+                    </div>`).join('')}
             </div>
         `;
     });
 }
-window.onload = renderWorkouts;
+window.onload = render;
 </script>
 
 
