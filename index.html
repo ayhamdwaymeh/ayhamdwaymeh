@@ -1152,22 +1152,17 @@ font-size: 14px;
 </section>
 
 
-<section style="margin: 20px 0; padding: 20px; background: #161616; border: 1px solid #333; border-radius: 16px; color: #fff; font-family: sans-serif;">
-    <div style="border-left: 4px solid #ff2d55; padding-left: 15px; margin-bottom: 20px;">
-        <h2 style="margin: 0; font-size: 20px;">WORKOUT HISTORY</h2>
-    </div>
+<section id="workout-section" style="margin: 20px 0; padding: 20px; background: #161616; border: 1px solid #333; border-radius: 16px; color: #fff; font-family: sans-serif;">
+    <h2 style="margin: 0; padding-bottom: 20px; color: #ff2d55;">WORKOUT HISTORY</h2>
 
     <div style="background: #000; padding: 15px; border-radius: 8px; border: 1px solid #333; margin-bottom: 20px;">
         <input type="text" id="exName" placeholder="Exercise Name" style="width:100%; padding:10px; margin-bottom:10px; background:#1a1a1a; border:1px solid #444; color:#fff; border-radius:4px; box-sizing:border-box;">
-        
-        <div id="sets-wrapper" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+        <div id="sets-wrapper" style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px;">
             <div style="display:flex; gap:5px;"><input type="number" class="w" placeholder="Weight" style="width:50%; padding:8px; background:#1a1a1a; border:1px solid #444; color:#fff;"><input type="number" class="r" placeholder="Reps" style="width:50%; padding:8px; background:#1a1a1a; border:1px solid #444; color:#fff;"></div>
             <div style="display:flex; gap:5px;"><input type="number" class="w" placeholder="Weight" style="width:50%; padding:8px; background:#1a1a1a; border:1px solid #444; color:#fff;"><input type="number" class="r" placeholder="Reps" style="width:50%; padding:8px; background:#1a1a1a; border:1px solid #444; color:#fff;"></div>
             <div style="display:flex; gap:5px;"><input type="number" class="w" placeholder="Weight" style="width:50%; padding:8px; background:#1a1a1a; border:1px solid #444; color:#fff;"><input type="number" class="r" placeholder="Reps" style="width:50%; padding:8px; background:#1a1a1a; border:1px solid #444; color:#fff;"></div>
             <div style="display:flex; gap:5px;"><input type="number" class="w" placeholder="Weight" style="width:50%; padding:8px; background:#1a1a1a; border:1px solid #444; color:#fff;"><input type="number" class="r" placeholder="Reps" style="width:50%; padding:8px; background:#1a1a1a; border:1px solid #444; color:#fff;"></div>
         </div>
-
-        <textarea id="exNote" placeholder="Notes..." style="width:100%; padding:10px; margin-bottom:10px; background:#1a1a1a; border:1px solid #444; color:#fff; border-radius:4px; box-sizing:border-box;"></textarea>
         <select id="exWeek" style="width:100%; padding:10px; background:#1a1a1a; color:#fff; margin-bottom:10px; border:1px solid #444;">
             <option value="WEEK 1">WEEK 1</option><option value="WEEK 2">WEEK 2</option>
             <option value="WEEK 3">WEEK 3</option><option value="WEEK 4">WEEK 4</option>
@@ -1175,11 +1170,42 @@ font-size: 14px;
         <button id="add-btn" style="width:100%; padding:12px; background:#ff2d55; border:none; color:white; font-weight:bold; cursor:pointer;">ADD EXERCISE</button>
     </div>
 
-    <div id="weeks-container"></div>
+    <div id="weeks-manual-container"></div>
 </section>
 
 <script>
-// وظيفة حذف التمرين
+function render() {
+    const logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
+    const container = document.getElementById('weeks-manual-container');
+    container.innerHTML = "";
+    
+    ["WEEK 1", "WEEK 2", "WEEK 3", "WEEK 4"].forEach(w => {
+        const weekLogs = logs.filter(l => l.week === w);
+        const box = document.createElement('div');
+        box.style.cssText = "margin-bottom:10px; border:1px solid #333; background:#1a1a1a; border-radius:8px;";
+        
+        // العنوان الثابت
+        box.innerHTML = `<div onclick="this.nextElementSibling.classList.toggle('hidden')" style="padding:15px; cursor:pointer; font-weight:bold; color:#ff2d55;">${w}</div>
+                         <div class="hidden" style="display:none; padding:15px; border-top:1px solid #333;">
+                            ${weekLogs.map(l => `<div style="margin-bottom:10px; border-bottom:1px solid #444; display:flex; justify-content:space-between;">
+                                <div><b>${l.name}</b><br>${l.sets.join(' | ')}</div>
+                                <button onclick="deleteLog(${l.id})" style="color:red; background:none; border:none; cursor:pointer;">X</button>
+                            </div>`).join('') || '<div style="color:#666;">No exercises.</div>'}
+                         </div>`;
+        container.appendChild(box);
+    });
+    // تفعيل خاصية الفتح والإغلاق
+    document.querySelectorAll('.hidden').forEach(el => el.style.display = 'none');
+}
+
+// تعديل بسيط للفتح والإغلاق بدون details
+document.addEventListener('click', (e) => {
+    if (e.target.parentElement.parentElement.id === 'weeks-manual-container' && e.target.tagName === 'DIV') {
+        const content = e.target.nextElementSibling;
+        content.style.display = (content.style.display === 'none') ? 'block' : 'none';
+    }
+});
+
 function deleteLog(id) {
     let logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
     logs = logs.filter(l => l.id !== id);
@@ -1187,55 +1213,21 @@ function deleteLog(id) {
     render();
 }
 
-// وظيفة عرض البيانات
-function render() {
-    const logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
-    const container = document.getElementById('weeks-container');
-    container.innerHTML = "";
-    
-    ["WEEK 1", "WEEK 2", "WEEK 3", "WEEK 4"].forEach(w => {
-        const weekLogs = logs.filter(l => l.week === w);
-        const details = document.createElement('details');
-        details.style.cssText = "margin-bottom:10px; border:1px solid #333; background:#1a1a1a; border-radius:8px; color:#ff2d55; overflow:hidden;";
-        details.innerHTML = `<summary style="padding:15px; cursor:pointer; font-weight:bold;">${w}</summary>
-            <div style="padding:15px; border-top:1px solid #333; color:#fff;">
-                ${weekLogs.map(l => `
-                    <div style="margin-bottom:15px; border-bottom:1px solid #444; padding-bottom:10px; display:flex; justify-content:space-between;">
-                        <div style="flex:1;">
-                            <b style="color:#ff2d55; font-size:16px;">${l.name}</b><br>
-                            <div style="margin-top:5px; font-size:14px;">${l.sets.join('<br>')}</div>
-                            ${l.note ? `<div style="margin-top:5px; color:#aaa; font-style:italic;">Note: ${l.note}</div>` : ''}
-                        </div>
-                        <button onclick="deleteLog(${l.id})" style="background:none; border:none; color:#ff4444; cursor:pointer; font-weight:bold; font-size:18px;">✕</button>
-                    </div>`).join('') || '<div style="color:#666;">No exercises yet.</div>'}
-            </div>`;
-        container.appendChild(details);
-    });
-}
-
-// وظيفة الإضافة
 document.getElementById('add-btn').onclick = function() {
     const name = document.getElementById('exName').value;
-    if(!name) return alert("Please enter exercise name");
-    
+    if(!name) return alert("Enter name");
     const weights = document.querySelectorAll('.w');
     const reps = document.querySelectorAll('.r');
     let setsData = [];
     for(let i=0; i<4; i++) {
-        if(weights[i].value !== "") setsData.push(`Set ${i+1}: ${weights[i].value}kg x ${reps[i].value || 0}`);
+        if(weights[i].value !== "") setsData.push(`${weights[i].value}kg x ${reps[i].value || 0}`);
     }
-
-    const log = { id: Date.now(), name, sets: setsData, note: document.getElementById('exNote').value, week: document.getElementById('exWeek').value };
+    const log = { id: Date.now(), name, sets: setsData, week: document.getElementById('exWeek').value };
     let logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
     logs.push(log);
     localStorage.setItem('fitlead_logs', JSON.stringify(logs));
-    
-    document.getElementById('exName').value = "";
-    document.querySelectorAll('.w, .r').forEach(el => el.value = "");
-    document.getElementById('exNote').value = "";
     render();
 };
-
 render();
 </script>
 
