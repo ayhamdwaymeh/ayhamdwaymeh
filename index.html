@@ -1175,10 +1175,45 @@ font-size: 14px;
         <button id="add-btn" style="width:100%; padding:12px; background:#ff2d55; border:none; color:white; font-weight:bold; cursor:pointer;">ADD EXERCISE</button>
     </div>
 
-    <div id="display-area"></div>
+    <div id="weeks-container"></div>
 </section>
 
 <script>
+// وظيفة حذف التمرين
+function deleteLog(id) {
+    let logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
+    logs = logs.filter(l => l.id !== id);
+    localStorage.setItem('fitlead_logs', JSON.stringify(logs));
+    render();
+}
+
+// وظيفة عرض البيانات
+function render() {
+    const logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
+    const container = document.getElementById('weeks-container');
+    container.innerHTML = "";
+    
+    ["WEEK 1", "WEEK 2", "WEEK 3", "WEEK 4"].forEach(w => {
+        const weekLogs = logs.filter(l => l.week === w);
+        const details = document.createElement('details');
+        details.style.cssText = "margin-bottom:10px; border:1px solid #333; background:#1a1a1a; border-radius:8px; color:#ff2d55; overflow:hidden;";
+        details.innerHTML = `<summary style="padding:15px; cursor:pointer; font-weight:bold;">${w}</summary>
+            <div style="padding:15px; border-top:1px solid #333; color:#fff;">
+                ${weekLogs.map(l => `
+                    <div style="margin-bottom:15px; border-bottom:1px solid #444; padding-bottom:10px; display:flex; justify-content:space-between;">
+                        <div style="flex:1;">
+                            <b style="color:#ff2d55; font-size:16px;">${l.name}</b><br>
+                            <div style="margin-top:5px; font-size:14px;">${l.sets.join('<br>')}</div>
+                            ${l.note ? `<div style="margin-top:5px; color:#aaa; font-style:italic;">Note: ${l.note}</div>` : ''}
+                        </div>
+                        <button onclick="deleteLog(${l.id})" style="background:none; border:none; color:#ff4444; cursor:pointer; font-weight:bold; font-size:18px;">✕</button>
+                    </div>`).join('') || '<div style="color:#666;">No exercises yet.</div>'}
+            </div>`;
+        container.appendChild(details);
+    });
+}
+
+// وظيفة الإضافة
 document.getElementById('add-btn').onclick = function() {
     const name = document.getElementById('exName').value;
     if(!name) return alert("Please enter exercise name");
@@ -1187,7 +1222,7 @@ document.getElementById('add-btn').onclick = function() {
     const reps = document.querySelectorAll('.r');
     let setsData = [];
     for(let i=0; i<4; i++) {
-        if(weights[i].value !== "") setsData.push(`${weights[i].value}kg x ${reps[i].value || 0}`);
+        if(weights[i].value !== "") setsData.push(`Set ${i+1}: ${weights[i].value}kg x ${reps[i].value || 0}`);
     }
 
     const log = { id: Date.now(), name, sets: setsData, note: document.getElementById('exNote').value, week: document.getElementById('exWeek').value };
@@ -1195,41 +1230,13 @@ document.getElementById('add-btn').onclick = function() {
     logs.push(log);
     localStorage.setItem('fitlead_logs', JSON.stringify(logs));
     
-    // إعادة تعيين الحقول
     document.getElementById('exName').value = "";
     document.querySelectorAll('.w, .r').forEach(el => el.value = "");
     document.getElementById('exNote').value = "";
-    
-    loadLogs();
+    render();
 };
 
-function deleteLog(id) {
-    let logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
-    logs = logs.filter(l => l.id !== id);
-    localStorage.setItem('fitlead_logs', JSON.stringify(logs));
-    loadLogs();
-}
-
-function loadLogs() {
-    const logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
-    const container = document.getElementById('display-area');
-    container.innerHTML = "";
-    
-    ["WEEK 1", "WEEK 2", "WEEK 3", "WEEK 4"].forEach(w => {
-        const weekLogs = logs.filter(l => l.week === w);
-        const details = document.createElement('details');
-        details.style.cssText = "margin-bottom:10px; border:1px solid #333; background:#1a1a1a; border-radius:8px; padding:10px; color:#ff2d55;";
-        details.innerHTML = `<summary style="cursor:pointer; font-weight:bold;">${w}</summary>
-            <div style="color:#fff; padding-top:10px; font-size:13px;">
-                ${weekLogs.map(l => `<div style="margin-bottom:8px; padding-bottom:5px; border-bottom:1px solid #333; display:flex; justify-content:space-between;">
-                    <div><b>${l.name}</b><br>${l.sets.join(' | ')}<br><i style="color:#aaa;">${l.note}</i></div>
-                    <button onclick="deleteLog(${l.id})" style="background:none; border:none; color:#ff4444; cursor:pointer;">X</button>
-                </div>`).join('')}
-            </div>`;
-        container.appendChild(details);
-    });
-}
-loadLogs();
+render();
 </script>
 
 
