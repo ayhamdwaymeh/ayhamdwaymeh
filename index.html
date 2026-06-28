@@ -1151,6 +1151,89 @@ font-size: 14px;
 </div>
 </section>
 
+
+<section id="fitlead-history" style="margin: 20px 0; padding: 20px; background: #161616; border: 1px solid #333; border-radius: 16px; color: #fff; font-family: sans-serif;">
+    <div style="border-left: 4px solid #ff2d55; padding-left: 15px; margin-bottom: 20px;">
+        <h2 style="margin: 0; font-size: 20px;">WORKOUT HISTORY</h2>
+    </div>
+
+    <div style="background: #000; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #333;">
+        <input type="text" id="exName" placeholder="Exercise Name" style="width:100%; padding:12px; margin-bottom:10px; background:#1a1a1a; border:1px solid #444; color:#fff; border-radius:4px; box-sizing:border-box;">
+        <input type="number" id="exSets" placeholder="Sets" style="width:100%; padding:12px; margin-bottom:10px; background:#1a1a1a; border:1px solid #444; color:#fff; border-radius:4px; box-sizing:border-box;">
+        <input type="number" id="exReps" placeholder="Reps" style="width:100%; padding:12px; margin-bottom:10px; background:#1a1a1a; border:1px solid #444; color:#fff; border-radius:4px; box-sizing:border-box;">
+        <input type="number" id="exWeight" placeholder="Weight" style="width:100%; padding:12px; margin-bottom:10px; background:#1a1a1a; border:1px solid #444; color:#fff; border-radius:4px; box-sizing:border-box;">
+        <textarea id="exNote" placeholder="Notes..." style="width:100%; padding:12px; margin-bottom:10px; background:#1a1a1a; border:1px solid #444; color:#fff; border-radius:4px; box-sizing:border-box;"></textarea>
+        
+        <select id="exWeek" style="width:100%; padding:12px; background:#1a1a1a; color:#fff; border-radius:4px; margin-bottom:10px; border:1px solid #444;">
+            <option value="WEEK 1">WEEK 1</option>
+            <option value="WEEK 2">WEEK 2</option>
+            <option value="WEEK 3">WEEK 3</option>
+            <option value="WEEK 4">WEEK 4</option>
+        </select>
+        
+        <button id="addBtn" style="width:100%; padding:12px; background:#ff2d55; border:none; color:white; font-weight:bold; cursor:pointer; border-radius:4px;">ADD EXERCISE</button>
+    </div>
+
+    <div id="weeks-display"></div>
+</section>
+
+<script>
+(function() {
+    // التأكد من تحميل الكود بعد الصفحة
+    document.getElementById('addBtn').addEventListener('click', function() {
+        const log = {
+            name: document.getElementById('exName').value,
+            sets: document.getElementById('exSets').value,
+            reps: document.getElementById('exReps').value,
+            weight: document.getElementById('exWeight').value,
+            note: document.getElementById('exNote').value,
+            week: document.getElementById('exWeek').value
+        };
+        if(!log.name) return alert("يرجى كتابة اسم التمرين");
+        
+        let logs = JSON.parse(localStorage.getItem('fitlead_logs')) || [];
+        logs.push(log);
+        localStorage.setItem('fitlead_logs', JSON.stringify(logs));
+        
+        document.getElementById('exName').value = "";
+        document.getElementById('exSets').value = "";
+        document.getElementById('exReps').value = "";
+        document.getElementById('exWeight').value = "";
+        document.getElementById('exNote').value = "";
+        renderLogs();
+    });
+
+    function renderLogs() {
+        const logs = JSON.parse(localStorage.getItem('fitlead_logs')) || [];
+        const container = document.getElementById('weeks-display');
+        container.innerHTML = "";
+        
+        ["WEEK 1", "WEEK 2", "WEEK 3", "WEEK 4"].forEach(w => {
+            const weekLogs = logs.filter(l => l.week === w);
+            container.innerHTML += `
+                <div style="margin-bottom:10px; border:1px solid #333; border-radius:8px; overflow:hidden; background:#1a1a1a;">
+                    <details style="padding:15px; color:#ff2d55; font-weight:bold; cursor:pointer;">
+                        <summary>${w}</summary>
+                        <div style="padding:15px; color:#fff; border-top:1px solid #333; margin-top:10px;">
+                            ${weekLogs.length > 0 ? weekLogs.map(l => `
+                                <div style="margin-bottom:10px; border-bottom:1px solid #333; padding-bottom:5px;">
+                                    <div style="font-weight:bold;">${l.name}</div>
+                                    <div style="font-size:13px; color:#aaa;">${l.sets} Sets | ${l.reps} Reps | ${l.weight}kg</div>
+                                    <div style="font-size:12px; color:#ff2d55;">Note: ${l.note}</div>
+                                </div>
+                            `).join('') : '<p style="font-size:12px; color:#666;">لا توجد تمارين بعد</p>'}
+                        </div>
+                    </details>
+                </div>
+            `;
+        });
+    }
+    renderLogs();
+})();
+</script>
+
+
+    
 <!-- NUTRITION SECTION -->
 <section class="section" id="nutrition">
 <h2 class="title" id="secTitle2">Nutrition Plans</h2>
