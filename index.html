@@ -1154,10 +1154,11 @@ font-size: 14px;
 
 <section style="margin: 20px 0; padding: 20px; background: #161616; border: 1px solid #333; border-radius: 16px; color: #fff; font-family: sans-serif;">
     <div style="border-left: 4px solid #ff2d55; padding-left: 15px; margin-bottom: 20px;">
-        <h2 style="margin: 0; font-size: 20px;">WORKOUT HISTORY</h2>
+        <h2 id="form-title" style="margin: 0; font-size: 20px;">WORKOUT HISTORY</h2>
     </div>
 
     <div id="workout-form" style="background: #000; padding: 15px; border-radius: 8px; border: 1px solid #333;">
+        <input type="hidden" id="editId">
         <input type="text" id="exName" placeholder="Exercise Name" style="width:100%; padding:10px; margin-bottom:10px; background:#1a1a1a; border:1px solid #444; color:#fff; border-radius:4px;">
         
         <div id="sets-wrapper" style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px;">
@@ -1181,6 +1182,7 @@ font-size: 14px;
 <script>
 document.getElementById('add-btn').onclick = function() {
     const name = document.getElementById('exName').value;
+    const editId = document.getElementById('editId').value;
     if(!name) return alert("Enter name!");
     
     const weights = document.querySelectorAll('.w');
@@ -1190,18 +1192,40 @@ document.getElementById('add-btn').onclick = function() {
         if(weights[i].value) setsData.push(`${weights[i].value}kg x ${reps[i].value || 0}`);
     }
 
-    const log = {
-        name,
-        sets: setsData.join(' | '),
-        note: document.getElementById('exNote').value,
-        week: document.getElementById('exWeek').value
-    };
-
     let logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
-    logs.push(log);
+    
+    if(editId) {
+        const index = logs.findIndex(l => l.id == editId);
+        logs[index] = { id: parseInt(editId), name, sets: setsData.join(' | '), note: document.getElementById('exNote').value, week: document.getElementById('exWeek').value };
+        document.getElementById('add-btn').innerText = "ADD EXERCISE";
+        document.getElementById('editId').value = "";
+    } else {
+        logs.push({ id: Date.now(), name, sets: setsData.join(' | '), note: document.getElementById('exNote').value, week: document.getElementById('exWeek').value });
+    }
+
     localStorage.setItem('fitlead_logs', JSON.stringify(logs));
+    document.getElementById('exName').value = "";
+    document.getElementById('exNote').value = "";
     loadLogs();
 };
+
+function deleteLog(id) {
+    let logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
+    logs = logs.filter(l => l.id !== id);
+    localStorage.setItem('fitlead_logs', JSON.stringify(logs));
+    loadLogs();
+}
+
+function editLog(id) {
+    let logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
+    const log = logs.find(l => l.id === id);
+    document.getElementById('exName').value = log.name;
+    document.getElementById('exNote').value = log.note;
+    document.getElementById('exWeek').value = log.week;
+    document.getElementById('editId').value = id;
+    document.getElementById('add-btn').innerText = "UPDATE EXERCISE";
+    window.scrollTo(0,0);
+}
 
 function loadLogs() {
     const logs = JSON.parse(localStorage.getItem('fitlead_logs') || "[]");
@@ -1214,13 +1238,20 @@ function loadLogs() {
         details.style.cssText = "margin-bottom:10px; border:1px solid #333; background:#1a1a1a; border-radius:8px; padding:10px; color:#ff2d55;";
         details.innerHTML = `<summary style="cursor:pointer; font-weight:bold;">${w}</summary>
             <div style="color:#fff; padding-top:10px; font-size:13px;">
-                ${weekLogs.map(l => `<div><b>${l.name}</b>: ${l.sets}<br><i style="color:#aaa;">${l.note}</i></div><hr style="border:0; border-top:1px solid #333; margin:5px 0;">`).join('')}
+                ${weekLogs.map(l => `
+                    <div style="margin-bottom:10px;">
+                        <b>${l.name}</b>: ${l.sets}<br>
+                        <i style="color:#aaa;">${l.note}</i><br>
+                        <button onclick="editLog(${l.id})" style="background:none; border:none; color:#55f; cursor:pointer; font-size:10px; padding:0; margin-right:10px;">EDIT</button>
+                        <button onclick="deleteLog(${l.id})" style="background:none; border:none; color:#f55; cursor:pointer; font-size:10px; padding:0;">DELETE</button>
+                    </div><hr style="border:0; border-top:1px solid #333; margin:5px 0;">`).join('')}
             </div>`;
         container.appendChild(details);
     });
 }
 loadLogs();
 </script>
+
 
 
     
